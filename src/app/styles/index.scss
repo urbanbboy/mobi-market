@@ -1,0 +1,11 @@
+@import './reset.scss';
+@import './variables/global.scss';
+
+.app {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+.page-wrapper {
+    padding: 0 42px;
+}
