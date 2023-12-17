@@ -1,0 +1,12 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--navbar-height);
+    padding-left: 42px;
+    padding-right: 42px;
+
+    &_buttons {
+        display: flex;
+    }
+}

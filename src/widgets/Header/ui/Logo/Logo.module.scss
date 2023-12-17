@@ -1,0 +1,13 @@
+.Logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    &_text {
+        text-transform: uppercase;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 800;
+        font-size: 20px;
+    }
+}
