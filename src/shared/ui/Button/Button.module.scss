@@ -1,10 +1,28 @@
 .Button {
     cursor: pointer;
     color: var(--font-secondary-color);
+    transition: .4s all;
+}
+
+.Button:hover {
+    transition: .4s all;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .contained {
+    color: #fff;
     background-color: #5458EA;
+    border: none;
     border-radius: 20px;
-    padding: 20px;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+
+.disabled {
+    color: #9CA4AB;
+    background-color:#F7F7F8;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: 700;
 }

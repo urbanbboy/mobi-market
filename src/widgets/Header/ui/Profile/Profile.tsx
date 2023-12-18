@@ -1,5 +1,10 @@
+import cls from './Profile.module.scss'
+
 export const Profile = () => {
     return (
-        <div>Profile</div>
+        <div className={cls.Profile}>
+            <div>nickname</div>
+            <div className={cls.Profile_img}></div>
+        </div>
     )
 }

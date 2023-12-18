@@ -8,7 +8,6 @@ export const ErrorPage = () => {
 
     return (
         <div className={cls.ErrorPage}>
-            <h1>404 Not Found</h1>
             <p>Произошла непредвиденная ошибка</p>
             <button onClick={reloadPage}>Обновить страницу</button>
         </div>

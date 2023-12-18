@@ -3,10 +3,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 8px;
+    text-decoration: none;
 
     &_text {
         text-transform: uppercase;
         font-family: 'Nunito', sans-serif;
+        color: #000;
         font-weight: 800;
         font-size: 20px;
     }
