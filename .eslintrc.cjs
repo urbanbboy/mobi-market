@@ -16,6 +16,7 @@ module.exports = {
     ],
     "indent": [2, 4],
     "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "react-refresh/only-export-components": "off",
   },
 }

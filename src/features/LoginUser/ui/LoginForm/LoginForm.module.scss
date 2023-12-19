@@ -1,0 +1,22 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+
+    &_input {
+        
+        &_username {
+            margin-bottom: 47px;
+        }
+    }
+
+    &_forgot {
+        padding-top: 20px;
+        padding-bottom: 49px;
+
+        &_link {
+            text-decoration: none;
+            color: var(--font-secondary-color);
+            font-size: var(--font-size-s);
+        }
+    }
+}

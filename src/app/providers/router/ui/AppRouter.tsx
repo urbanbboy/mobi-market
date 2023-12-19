@@ -12,7 +12,7 @@ export const AppRouter = () => {
                         key={path}
                         path={path}
                         element={(
-                            <div className="page-wrapper">
+                            <div>
                                 {element}
                             </div>
                         )}
