@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
 
 interface loginByUsernameProps {
     username: string;
@@ -9,20 +8,27 @@ interface loginByUsernameProps {
 export const loginByUsername = createAsyncThunk<'', loginByUsernameProps, { rejectValue: string }>(
     'login/loginByUsername',
     async ({ username, password }, thunkAPI) => {
+        const { extra, rejectWithValue } = thunkAPI
+        
         try {
-            const response = await axios.post('https://neobook.online/mobi-market/users/login/', {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+            const response = await extra.api.post('/users/login/', {
                 username,
                 password
             })
-
-            if(!response.data) {
+            if (!response.data) {
                 throw new Error('no data');
-                
             }
             return response.data
-        } catch (error) {
-            console.log(error)
-            thunkAPI.rejectWithValue('error in login/loginByUsername async thunk')
+        } catch (error: any) {
+            if (error.response && error.response.status === 404) {
+                return rejectWithValue('Неверный логин или пароль');
+            } else {
+                return rejectWithValue(
+                    'Ошибка при входе. Пожалуйста, попробуйте снова.'
+                );
+            }
         }
 
     }

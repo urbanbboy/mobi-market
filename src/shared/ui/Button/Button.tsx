@@ -3,12 +3,10 @@ import cls from './Button.module.scss';
 
 export enum ButtonTheme {
     CONTAINED = 'contained',
-    DISABLED = 'disabled'
 }
 
 const themeClasses = {
     [ButtonTheme.CONTAINED]: cls.contained,
-    [ButtonTheme.DISABLED]: cls.disabled,
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,6 +14,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     active?: boolean;
     disabled?: boolean;
     theme?: ButtonTheme;
+    fullWidth?: boolean;
 }
 
 export const Button = ({
@@ -23,12 +22,15 @@ export const Button = ({
     active,
     disabled,
     theme,
+    fullWidth,
     ...otherProps
 }: ButtonProps) => {
 
     const buttonClasses = [
         cls.Button,
         theme ? themeClasses[theme] : '',
+        fullWidth ? cls.fullWidth : '',
+        disabled ? cls.diabled : ''
     ].join(' ');
 
     return (

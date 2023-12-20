@@ -2,10 +2,11 @@ export interface LoginSchema {
     username: string;
     password: string;
     isLoading: boolean;
-    error?: string | undefined;
+    loginError?: string | undefined;
 }
 
 export interface Errors {
-    username?: string;
-    password?: string;
+    [key: string]: string | null;
+    // username?: string;
+    // password?: string;
 }

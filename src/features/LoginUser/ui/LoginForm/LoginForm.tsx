@@ -10,37 +10,55 @@ import { getLoginState } from '../../model/selectors/getLoginState/getLoginState
 import { loginActions } from '../../model/slice/loginSlice'
 import { loginByUsername } from '../../model/service/loginByUsername/loginByUsername'
 import cls from './LoginForm.module.scss'
-import { useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
-export const LoginForm = () => {
-    const dispatch = useAppDispatch()
-    const { username, password, isLoading } = useSelector(getLoginState)
+export const LoginForm = memo(() => {
+    const dispatch = useAppDispatch();
+    const { username, password, isLoading, loginError } = useSelector(getLoginState);
     const [errors, setErrors] = useState<Errors>({});
 
-    const validateField = async (fieldName: string, value: string) => {
+    const validateForm = useCallback(() => {
+        let hasErrors = false;
+        const newErrors: Errors = {};
+
         try {
-            await AuthValidation.validateAt(fieldName, { [fieldName]: value });
-            setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: null }));
-        } catch (error: any) {
-            setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: error.message }));
+            AuthValidation.validateSync({ username, password }, { abortEarly: false });
+        } catch (validationError: any) {
+            validationError.inner.forEach((error: any) => {
+                newErrors[error.path] = error.message;
+            });
+            hasErrors = true;
         }
-    };
 
-    const onChangeUsername = (value: string) => {
-        validateField('username', value);
-        dispatch(loginActions.setUsername(value))
-    }
+        setErrors(newErrors);
+        return hasErrors;
+    }, [password, username]);
 
-    const onChangePassword = (value: string) => {
-        validateField('password', value);
-        dispatch(loginActions.setPassword(value))
-    }
+    const onLoginClick = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-    const onLoginClick = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        // await AuthValidation.validate({ username, password });
-        dispatch(loginByUsername({ username, password }))
-    }
+        const hasFormErrors = validateForm();
+        if (!hasFormErrors) {
+            dispatch(loginByUsername({ username, password }));
+        }
+    }, [dispatch, username, password, validateForm]);
+
+    const onChangeUsername = useCallback((value: string) => {
+        setErrors((prevErrors) => ({ ...prevErrors, username: '' }));
+        dispatch(loginActions.setUsername(value));
+    }, [dispatch]);
+
+    const onChangePassword = useCallback((value: string) => {
+        setErrors((prevErrors) => ({ ...prevErrors, password: '' }));
+        dispatch(loginActions.setPassword(value));
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (loginError) {
+            toast.error(loginError);
+        }
+    }, [loginError]);
 
     return (
         <div className={cls.Form}>
@@ -81,4 +99,4 @@ export const LoginForm = () => {
             </form>
         </div>
     )
-}
+})
