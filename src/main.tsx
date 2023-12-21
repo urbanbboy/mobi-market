@@ -8,13 +8,13 @@ import { ToastProvider } from '@app/providers/ToastProvider'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <StoreProvider>
-            <ToastProvider />
-            <ErrorBoundary>
-                <RouterProvider>
+        <RouterProvider>
+            <StoreProvider>
+                <ToastProvider />
+                <ErrorBoundary>
                     <App />
-                </RouterProvider>
-            </ErrorBoundary>
-        </StoreProvider>
+                </ErrorBoundary>
+            </StoreProvider>
+        </RouterProvider>
     </React.StrictMode>,
 )
