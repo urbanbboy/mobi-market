@@ -1,6 +1,8 @@
 import { LoginPage } from '@pages/LoginPage'
+import { MainPage } from '@pages/MainPage'
 import { NotFoundPage } from '@pages/NotFoundPage'
-import { RouteProps } from 'react-router-dom'
+import { RegisterPage } from '@pages/RegisterPage'
+import { AppRouteProps } from '@shared/types/router'
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -16,10 +18,11 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.NOT_FOUND]: '*',
 }
 
-export const routeConfig:  Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, AppRouteProps> = {
     [AppRoutes.MAIN]: {
         path: RoutePath.main,
-        element: <div>MAINPAGE</div>
+        element: <MainPage />,
+        authOnly: true
     },
     [AppRoutes.LOGIN]: {
         path: RoutePath.login,
@@ -27,7 +30,7 @@ export const routeConfig:  Record<AppRoutes, RouteProps> = {
     },
     [AppRoutes.REGISTER]: {
         path: RoutePath.register,
-        element: <div>REGISTERPAGE</div>
+        element: <RegisterPage />
     },
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath.not_found,
