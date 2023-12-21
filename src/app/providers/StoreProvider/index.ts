@@ -1,4 +1,4 @@
-import { StateSchema } from './config/stateSchema';
+import { StateSchema, ThunkExtraArg } from './config/stateSchema';
 import { AppDispatch, store } from "./config/store";
 import { StoreProvider } from "./ui/StoreProvider";
 
@@ -9,5 +9,6 @@ export {
 
 export type {
     AppDispatch,
-    StateSchema
+    StateSchema,
+    ThunkExtraArg
 }

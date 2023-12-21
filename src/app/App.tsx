@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { AppRouter } from "./providers/router"
 import './styles/index.scss'
-import { useAppDispatch } from "@shared/hooks/useAppDispatch/useAppDispatch"
 import { getUserInited, userActions } from "@entities/User"
 import { useSelector } from "react-redux"
+import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 
 function App() {
     const dispatch = useAppDispatch()
