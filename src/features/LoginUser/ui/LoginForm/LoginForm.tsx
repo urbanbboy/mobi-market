@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Input } from "@shared/ui/Input"
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import { AuthValidation } from '@shared/validation/authValidation'
 import { AuthLoader } from '@shared/ui/AuthLoader/AuthLoader'
-import { useAppDispatch } from '@shared/hooks/useAppDispatch/useAppDispatch'
 import { Errors } from '../../model/types/LoginSchema'
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState'
 import { loginActions } from '../../model/slice/loginSlice'
@@ -12,9 +11,12 @@ import { loginByUsername } from '../../model/service/loginByUsername/loginByUser
 import cls from './LoginForm.module.scss'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { RoutePath } from '@app/providers/router'
+import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 export const LoginForm = memo(() => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate()
     const { username, password, isLoading, loginError } = useSelector(getLoginState);
     const [errors, setErrors] = useState<Errors>({});
 
@@ -35,14 +37,18 @@ export const LoginForm = memo(() => {
         return hasErrors;
     }, [password, username]);
 
-    const onLoginClick = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    const onLoginClick = useCallback( async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const hasFormErrors = validateForm();
         if (!hasFormErrors) {
-            dispatch(loginByUsername({ username, password }));
+            const result = await dispatch(loginByUsername({ username, password }));
+            if(result.meta.requestStatus === 'fulfilled') {
+                // <Navigate to={RoutePath.main} />
+                navigate(RoutePath.main)
+            }
         }
-    }, [dispatch, username, password, validateForm]);
+    }, [dispatch, username, password, validateForm, navigate]);
 
     const onChangeUsername = useCallback((value: string) => {
         setErrors((prevErrors) => ({ ...prevErrors, username: '' }));
@@ -97,6 +103,9 @@ export const LoginForm = memo(() => {
                     {isLoading ? <AuthLoader /> : 'Войти'}
                 </Button>
             </form>
+            <div className={cls.Register}>
+                <Link to={RoutePath.register} className={cls.Register_link}>Зарегистрироваться</Link>
+            </div>
         </div>
     )
 })

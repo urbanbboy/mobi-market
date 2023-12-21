@@ -25,3 +25,14 @@
     color: #ff3333;
     font-size: var(--font-size-s);
 }
+
+.Register {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px; 
+
+    &_link {
+        text-decoration: none;
+        color: var(--font-secondary-color);
+    }
+}
