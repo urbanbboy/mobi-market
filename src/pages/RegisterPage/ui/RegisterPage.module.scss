@@ -1,0 +1,46 @@
+.RegisterPage {
+    display: flex;
+
+    &_form {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 50%;
+    }
+
+    &_title {
+        position: absolute;
+        top: 30px;
+
+        font-size: var(--font-size-l);
+        font-weight: 700;
+        color: #000;
+    }
+
+    &_goBack {
+        cursor: pointer;
+        position: absolute;
+        top: 30px;
+        left: 40px;
+
+    }
+
+    &_goBack a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        font-size: var(--font-size-m);
+        color: #000;
+        text-decoration: none;
+        gap: 6px;
+    }
+
+    &_goBack img {
+        padding: 10px 16px;
+        background-color: #fff;
+        border-radius: 50px;
+    }
+}

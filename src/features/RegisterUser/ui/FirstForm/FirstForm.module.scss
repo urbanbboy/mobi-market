@@ -1,0 +1,42 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+
+    &_input {
+        
+        &_username {
+            margin-bottom: 47px;
+        }
+
+        &_email {
+            margin-bottom: 70px;
+        }
+    }
+
+    &_forgot {
+        padding-top: 20px;
+        padding-bottom: 49px;
+
+        &_link {
+            text-decoration: none;
+            color: var(--font-secondary-color);
+            font-size: var(--font-size-s);
+        }
+    }
+}
+
+.Error {
+    color: #ff3333;
+    font-size: var(--font-size-s);
+}
+
+.Register {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px; 
+
+    &_link {
+        text-decoration: none;
+        color: var(--font-secondary-color);
+    }
+}
