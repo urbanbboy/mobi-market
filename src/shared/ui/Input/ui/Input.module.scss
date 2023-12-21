@@ -90,3 +90,17 @@ label {
      background: transparent;
     }
 }
+
+.eyeIcon {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Измените это значение, чтобы выровнять иконку справа от поля ввода */
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .eyeIcon img {
+    width: 20px; /* Измените размеры иконки по вашему усмотрению */
+    height: auto;
+    display: block;
+  }
