@@ -1,23 +1,25 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode, memo } from "react";
 import cls from './Button.module.scss';
 
 export enum ButtonTheme {
     CONTAINED = 'contained',
+    CLEANED = 'cleaned'
 }
 
 const themeClasses = {
     [ButtonTheme.CONTAINED]: cls.contained,
+    [ButtonTheme.CLEANED]: cls.cleaned,
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactNode;
+    children?: ReactNode;
     active?: boolean;
     disabled?: boolean;
     theme?: ButtonTheme;
     fullWidth?: boolean;
 }
 
-export const Button = ({
+export const Button = memo(({
     children,
     active,
     disabled,
@@ -43,4 +45,4 @@ export const Button = ({
             {children}
         </button>
     );
-};
+});

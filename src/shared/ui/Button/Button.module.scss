@@ -5,10 +5,10 @@
     width: auto;
 }
 
-.Button:hover {
-    transition: .4s all;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 5px;
-}
+// .Button:hover {
+//     transition: .4s all;
+//     box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 5px;
+// }
 
 .contained {
     color: #fff;
@@ -26,6 +26,11 @@
     border-radius: 20px;
     padding: 10px 20px;
     font-weight: 700;
+}
+
+.cleaned {
+    border: none;
+    text-decoration: none;
 }
 
 .fullWidth {
