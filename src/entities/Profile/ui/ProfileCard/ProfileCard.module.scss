@@ -1,0 +1,56 @@
+.Profile {
+    height: 100vh;
+    padding: 0px 124px;
+}
+
+.Data {
+    padding-top: 60px;
+}
+
+.UserInfo {
+    background-color: #fff;
+    padding: 8px 10px;
+    border-radius: 12px;
+
+    &_avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 60px;
+
+        &_circle {
+            width: 100px;
+            height: 100px;
+            border: none;
+            border-radius: 50%;
+            background-color: var(--background-secondary-color);
+        }
+    }
+}
+
+.ContactInfo {
+    margin-top: 12px;
+    background-color: #fff;
+    padding: 8px 10px;
+    border-radius: 12px;
+}
+
+.Loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+}
+
+.Error {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.FinishRegister {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 56px;
+}

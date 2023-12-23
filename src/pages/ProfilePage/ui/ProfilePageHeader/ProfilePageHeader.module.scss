@@ -1,0 +1,42 @@
+.Header {
+    position: relative;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 50px 124px;
+
+    &_title {
+        position: absolute;
+        left: 48%;
+        text-align: center;
+        color: #000;
+        font-size: var(--font-size-l);
+        font-weight: 700;
+    }
+}
+
+.EditButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.goBack {
+    cursor: pointer;
+}
+
+.goBack a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: var(--font-size-m);
+    color: #000;
+    text-decoration: none;
+    gap: 6px;
+}
+
+.goBack img {
+    padding: 10px 16px;
+    background-color: #fff;
+    border-radius: 50px;
+}

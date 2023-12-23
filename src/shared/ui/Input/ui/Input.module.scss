@@ -1,6 +1,6 @@
 .group {
     position: relative;
-   }
+}
    
 .input {
     font-size: 16px;
@@ -8,12 +8,17 @@
     display: block;
     width: 335px;
     border: none;
-    border-bottom: 1px solid #515151;
+    border-bottom: 1px solid #B2B2B2;
     background: transparent;
 }
    
 .input:focus {
     outline: none;
+}
+
+.fullwidth {
+    width: 100%;
+    border-bottom: 1px solid #F7F6F9;
 }
    
 label {
@@ -41,66 +46,74 @@ label {
     width: 335px;
 }
    
-.bar:before, .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    top: -2px;
-    background: #5264AE;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+// .bar:before, .bar:after {
+//     content: '';
+//     height: 2px;
+//     width: 0;
+//     bottom: 1px;
+//     position: absolute;
+//     top: -2px;
+//     background: #5264AE;
+//     transition: 0.2s ease all;
+//     -moz-transition: 0.2s ease all;
+//     -webkit-transition: 0.2s ease all;
+// }
+   
+// .bar:before {
+//     left: 50%;
+// }
+   
+// .bar:after {
+//     right: 50%;
+// }
+   
+// .input:focus ~ .bar:before, .input:focus ~ .bar:after {
+//     width: 50%;
+// } 
+   
+// .highlight {
+//     position: absolute;
+//     height: 60%;
+//     width: 100px;
+//     top: 25%;
+//     left: 0;
+//     pointer-events: none;
+//     opacity: 0.5;
+// }
+   
+// .input:focus ~ .highlight {
+//     animation: inputHighlighter 0.3s ease;
+// }
+
+.readOnly {
+    opacity: 0.7;
 }
    
-.bar:before {
-    left: 50%;
-}
+// @keyframes inputHighlighter {
+//     from {
+//      background: #5264AE;
+//     }
    
-.bar:after {
-    right: 50%;
-}
-   
-.input:focus ~ .bar:before, .input:focus ~ .bar:after {
-    width: 50%;
-}
-   
-.highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-   
-.input:focus ~ .highlight {
-    animation: inputHighlighter 0.3s ease;
-}
-   
-@keyframes inputHighlighter {
-    from {
-     background: #5264AE;
-    }
-   
-    to {
-     width: 0;
-     background: transparent;
-    }
-}
+//     to {
+//      width: 0;
+//      background: transparent;
+//     }
+// }
 
 .eyeIcon {
     position: absolute;
     top: 50%;
-    right: 5px; /* Измените это значение, чтобы выровнять иконку справа от поля ввода */
+    right: 5px;
     transform: translateY(-50%);
     cursor: pointer;
   }
   
   .eyeIcon img {
-    width: 20px; /* Измените размеры иконки по вашему усмотрению */
+    width: 20px; 
     height: auto;
     display: block;
   }
+
+.isLast {
+    border-bottom: none;
+}
