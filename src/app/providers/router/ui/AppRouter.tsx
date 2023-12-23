@@ -4,15 +4,24 @@ import { Suspense, memo, useCallback } from "react"
 import { PageLoader } from "@widgets/PageLoader"
 import { AppRouteProps } from "@shared/types/router"
 import { RequireAuth } from "./RequireAuth"
+import { Sidebar } from "@widgets/Sidebar"
 
 const AppRouter = () => {
     const renderWithWrapper = useCallback((route: AppRouteProps) => {
         const element = (
-            <Suspense fallback={<PageLoader />}>{route.element}</Suspense>
+            <Suspense fallback={<PageLoader />}>
+                {route.hasSidebar
+                    ? <div className="withSidebar">
+                        <Sidebar />
+                        {route.element}
+                    </div>
+                    : route.element
+                }
+            </Suspense>
         )
 
         return (
-            <Route 
+            <Route
                 key={route.path}
                 path={route.path}
                 element={
@@ -23,7 +32,7 @@ const AppRouter = () => {
                     )
                 }
 
-            />            
+            />
         )
     }, [])
 

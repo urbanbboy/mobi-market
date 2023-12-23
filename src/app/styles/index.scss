@@ -11,6 +11,10 @@
     padding: 0 42px;
 }
 
+.withSidebar {
+    display: flex;
+}
+
 // auth bg layout 
 .layout {
     background: url('/login_bg.svg') left no-repeat;

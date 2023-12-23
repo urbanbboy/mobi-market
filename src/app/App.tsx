@@ -4,6 +4,7 @@ import './styles/index.scss'
 import { getUserInited, userActions } from "@entities/User"
 import { useSelector } from "react-redux"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
+import { PageLoader } from "@widgets/PageLoader"
 
 function App() {
     const dispatch = useAppDispatch()
@@ -12,6 +13,10 @@ function App() {
     useEffect(() => {
         dispatch(userActions.initAuthData())
     }, [dispatch])
+
+    if(!inited) {
+        return <PageLoader />
+    }
 
     return (
         <div className="app">

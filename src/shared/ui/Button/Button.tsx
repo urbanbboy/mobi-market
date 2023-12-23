@@ -3,12 +3,18 @@ import cls from './Button.module.scss';
 
 export enum ButtonTheme {
     CONTAINED = 'contained',
-    CLEANED = 'cleaned'
+    CLEANED = 'cleaned',
+    ACTION = 'action',
+    CONTAINED_RED = 'contained_red',
+    CONTAINED_GREEN = 'contained_green'
 }
 
 const themeClasses = {
     [ButtonTheme.CONTAINED]: cls.contained,
     [ButtonTheme.CLEANED]: cls.cleaned,
+    [ButtonTheme.ACTION]: cls.action,
+    [ButtonTheme.CONTAINED_RED]: cls.contained_red,
+    [ButtonTheme.CONTAINED_GREEN]: cls.contained_green,
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -32,7 +38,7 @@ export const Button = memo(({
         cls.Button,
         theme ? themeClasses[theme] : '',
         fullWidth ? cls.fullWidth : '',
-        disabled ? cls.diabled : ''
+        disabled ? cls.disabled : ''
     ].join(' ');
 
     return (
