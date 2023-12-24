@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { 
     ProfileCard, 
@@ -14,16 +14,16 @@ import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { ProfilePageHeader } from "./ProfilePageHeader/ProfilePageHeader"
 import cls from './Profile.module.scss'
 
-const ProfilePage = () => {
+export const ProfilePage = () => {
     const dispatch = useAppDispatch()
     const formData = useSelector(getProfileForm)
     const isLoading = useSelector(getProfileIsLoading)
     const profileError = useSelector(getProfileError)
     const isRegisterFinished = useSelector(getProfileIsFinished)
     const readOnly = useSelector(getProfileReadOnly)
+    const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
 
     useEffect(() => {
-        console.log('Fetching profile data...');
         dispatch(fetchProfileData())
     }, [dispatch])
 
@@ -49,7 +49,7 @@ const ProfilePage = () => {
 
     return (
         <div className={cls.ProfilePage}>
-            <ProfilePageHeader />
+            <ProfilePageHeader selectedFile={selectedFile} />
             <ProfileCard
                 isLoading={isLoading}
                 profileError={profileError}
@@ -61,9 +61,8 @@ const ProfilePage = () => {
                 onChangeUsername={onChangeUsername}
                 onChangeBirthDate={onChangeBirthDate}
                 onChangeEmail={onChangeEmail}
+                setSelectedFile={setSelectedFile}
             />            
         </div>
     )
 }
-
-export default ProfilePage

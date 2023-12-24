@@ -3,6 +3,8 @@ import { Profile } from '@entities/Profile'
 import { Loader } from '@shared/ui/Loader';
 import cls from './ProfileCard.module.scss'
 import { Button, ButtonTheme } from '@shared/ui/Button';
+import { DatePickerInput } from '@shared/ui/DatePickerInput';
+import { Avatar } from '../Avatar/Avatar';
 
 interface ProfileCardProps {
     data?: Profile;
@@ -15,6 +17,7 @@ interface ProfileCardProps {
     onChangeUsername?: (value?: string) => void,
     onChangeBirthDate?: (value?: string) => void,
     onChangeEmail?: (value?: string) => void,
+    setSelectedFile?: (value?: File | undefined) => void,
 }
 
 export const ProfileCard = (props: ProfileCardProps) => {
@@ -28,9 +31,10 @@ export const ProfileCard = (props: ProfileCardProps) => {
         onChangeLastName,
         onChangeUsername,
         onChangeBirthDate,
-        onChangeEmail
-    } = props
-
+        onChangeEmail,
+        setSelectedFile
+    } = props    
+    
     if (isLoading) {
         return (
             <div className={cls.Profile}>
@@ -56,7 +60,11 @@ export const ProfileCard = (props: ProfileCardProps) => {
         <div className={cls.Profile}>
             <div className={cls.Data}>
                 <div className={cls.UserInfo_avatar}>
-                    <div className={cls.UserInfo_avatar_circle}></div>
+                    <Avatar 
+                        data={data?.photo} 
+                        readOnly={readOnly}
+                        setSelectedFile={setSelectedFile}
+                    />
                 </div>
                 <div className={cls.UserInfo}>
                     <Input
@@ -80,20 +88,25 @@ export const ProfileCard = (props: ProfileCardProps) => {
                         fullWidth
                         readOnly={readOnly}
                     />
-                    <Input
+                    <DatePickerInput
                         value={data?.birth_date}
                         placeholder={'ггг-мм-дд'}
+                        dateFormat={'yyyy-MM-dd'}
                         onChange={onChangeBirthDate}
-                        fullWidth
                         readOnly={readOnly}
-                        isLast
                     />
                 </div>
                 <div className={cls.ContactInfo}>
-                    <div>
+                    <div className={cls.ContactInfo_phone}>
+                        <Button
+                            theme={ButtonTheme.ACTION}
+                        >
+                            Добавить номер
+                        </Button>
                         <Input
                             value={data?.phone}
-                            placeholder={'ггг-мм-дд'}
+                            placeholder={'0(000) 000 000'}
+                            readOnly={readOnly}
                             fullWidth
                         />
                     </div>

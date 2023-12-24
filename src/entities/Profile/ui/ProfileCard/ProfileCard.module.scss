@@ -1,30 +1,18 @@
 .Profile {
-    height: 100vh;
     padding: 0px 124px;
-}
-
-.Data {
-    padding-top: 60px;
 }
 
 .UserInfo {
     background-color: #fff;
     padding: 8px 10px;
     border-radius: 12px;
+    // display: flex;
 
     &_avatar {
         display: flex;
         justify-content: center;
         align-items: center;
         padding-bottom: 60px;
-
-        &_circle {
-            width: 100px;
-            height: 100px;
-            border: none;
-            border-radius: 50%;
-            background-color: var(--background-secondary-color);
-        }
     }
 }
 
@@ -33,6 +21,12 @@
     background-color: #fff;
     padding: 8px 10px;
     border-radius: 12px;
+
+    &_phone {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .Loading {

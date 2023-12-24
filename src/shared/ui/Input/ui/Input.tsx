@@ -10,7 +10,7 @@ interface InputProps extends HTMLInputProps {
     label?: string;
     fullWidth?: boolean;
     isLast?: boolean;
-    readOnly?: boolean; 
+    readOnly?: boolean;
 }
 
 export const Input = (props: InputProps) => {

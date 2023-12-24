@@ -15,8 +15,17 @@
 }
 
 .disabled {
-    color: #9CA4AB;
+    color: #000;
     background-color:#F7F7F8;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+
+.outlined {
+    color: #000;
+    background-color:#fff;
     border: none;
     border-radius: 20px;
     padding: 10px 20px;

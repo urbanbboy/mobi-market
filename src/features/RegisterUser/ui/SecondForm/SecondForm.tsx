@@ -62,6 +62,7 @@ export const SecondForm = memo(() => {
             const result = await dispatch(registerUser({ username, email, password, confirmPassword }));
             if (result.meta.requestStatus === 'fulfilled') {
                 navigate(RoutePath.main)
+                // toast.success('Регистрация прошла успешно. Войдите с новой учетной записью')
             }
         }
     }, [dispatch, username, email, password, confirmPassword, validateForm, navigate])

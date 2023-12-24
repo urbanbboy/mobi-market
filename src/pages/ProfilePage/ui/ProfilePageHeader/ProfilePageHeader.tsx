@@ -2,13 +2,19 @@ import { Link } from 'react-router-dom'
 import cls from './ProfilePageHeader.module.scss'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import { useSelector } from 'react-redux'
-import { getProfileReadOnly, profileActions, updateProfileData } from '@entities/Profile'
+import { getProfileForm, getProfileReadOnly, profileActions, updateProfileData } from '@entities/Profile'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 
-export const ProfilePageHeader = () => {
+interface ProfilePageHeaderProps {
+    selectedFile?: File | string | null;
+}
+
+export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
+    const { selectedFile } = props
     const readOnly = useSelector(getProfileReadOnly)
+    const data = useSelector(getProfileForm)
     const dispatch = useAppDispatch()
 
     const onEdit = useCallback(() => {
@@ -20,13 +26,22 @@ export const ProfilePageHeader = () => {
     }, [dispatch])
 
     const onSave = useCallback(async () => {
-        const result = await dispatch(updateProfileData())
+        const formData = new FormData()
+        formData.append('username', data?.username || '')
+        formData.append('last_name', data?.last_name || '')
+        formData.append('email', data?.email || '')
+        formData.append('first_name', data?.first_name || '')
+        formData.append('birth_date', data?.birth_date || '')
+        formData.append('photo', selectedFile || '')
+
+        const result = await dispatch(updateProfileData({ formData }))
         if (result.meta.requestStatus === 'fulfilled') {
             toast.success('Данные успешно изменены')
+            location.reload()
         } else {
             toast.error('Произошла ошибка при обновлении данных профиля')
         }
-    }, [dispatch])
+    }, [dispatch, data?.birth_date, data?.email, data?.first_name, data?.last_name, data?.username, selectedFile])
 
     return (
         <div className={cls.Header}>
@@ -39,7 +54,7 @@ export const ProfilePageHeader = () => {
             <div className={cls.Header_title}>Профиль</div>
             {readOnly
                 ? (
-                    <Button onClick={onEdit} theme={ButtonTheme.ACTION}>Изм.</Button>
+                    <Button onClick={onEdit} theme={ButtonTheme.ACTION}>Изменить</Button>
                 )
                 : (
                     <div className={cls.EditButtons}>

@@ -5,11 +5,22 @@ import { useSelector } from 'react-redux'
 import { getFirstName, getUsername, userActions } from '@entities/User'
 import cls from './Sidebar.module.scss'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { useState } from 'react'
+import { Modal } from '@shared/ui/Modal'
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch()
     const username = useSelector(getUsername)
     const firstName = useSelector(getFirstName)
+    const [open, setOpen] = useState<boolean>(false)
+
+    const onOpenModal = () => {
+        setOpen(true)
+    }
+
+    const onCloseModal = () => {
+        setOpen(false)
+    }
 
     const onClickLogout = () => {
         dispatch(userActions.logout())
@@ -47,7 +58,7 @@ export const Sidebar = () => {
                     </div>
                     <img src='/right_arrow.svg' alt="" />
                 </Link>
-                <Button theme={ButtonTheme.ACTION} onClick={onClickLogout}>
+                <Button theme={ButtonTheme.ACTION} onClick={onOpenModal}>
                     <div className={cls.Links_item_text}>
                         <img src="/logout.svg" alt="logout" />
                         Выйти
@@ -55,6 +66,31 @@ export const Sidebar = () => {
                     <img src='/right_arrow.svg' alt="" />
                 </Button>
             </div>
+            <Modal
+                onClose={onCloseModal}
+                isOpen={open}
+            >
+                <div className={cls.Modal}>
+                    <img src={'/modal_logout.svg'} alt="logout" />
+                    <div className={cls.Modal_title}>Вы действительно хотите выйти с акккаунта?</div>
+                    <div className={cls.Modal_buttons}>
+                        <Button 
+                            theme={ButtonTheme.CONTAINED} 
+                            fullWidth
+                            onClick={onClickLogout}
+                        >
+                            Выйти
+                        </Button>
+                        <Button 
+                            theme={ButtonTheme.OUTLINED} 
+                            fullWidth 
+                            onClick={onCloseModal}
+                        >
+                            Отмена
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

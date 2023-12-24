@@ -10,7 +10,6 @@ import cls from './FirstForm.module.scss'
 import { checkUser } from '../../model/service/checkUser/checkUser'
 import { CheckUserProps, Errors } from '../../model/types/registerSchema'
 import { checkUserValidation } from '@shared/validation/registerValidation'
-import { formValidate } from '@shared/lib/helpers/formValidate/formValidate'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 interface FirstFormProps {

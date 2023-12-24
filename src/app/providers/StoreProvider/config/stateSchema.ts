@@ -1,3 +1,4 @@
+import { ProfileSchema } from "@entities/Profile";
 import { UserSchema } from "@entities/User";
 import { LoginSchema } from "@features/LoginUser";
 import { RegisterSchema } from "@features/RegisterUser";
@@ -8,8 +9,15 @@ export interface StateSchema {
     
     loginForm: LoginSchema;
     registerForm: RegisterSchema;
+    profile: ProfileSchema
 }
 
 export interface ThunkExtraArg {
     api: AxiosInstance;
+}
+
+export interface ThunkConfig<T> {
+    rejectValue: T;
+    extra: ThunkExtraArg;
+    state: StateSchema
 }

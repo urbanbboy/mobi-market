@@ -1,10 +1,11 @@
 export interface User {
     username: string;
-    firstName?: string;
-    lastName?: string;
-    birthDate?: null;
+    first_name?: string;
+    last_name?: string;
+    birth_date?: null;
     phone?: null;
     email?: string;
+    photo?: string;
 }
 
 export interface UserSchema {
