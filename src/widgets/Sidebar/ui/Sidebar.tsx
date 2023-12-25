@@ -67,6 +67,7 @@ export const Sidebar = () => {
                 </Button>
             </div>
             <Modal
+                showCloseIcon={false}
                 onClose={onCloseModal}
                 isOpen={open}
             >

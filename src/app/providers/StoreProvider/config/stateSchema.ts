@@ -1,3 +1,4 @@
+import { ProductDetailsSchema } from "@entities/Product";
 import { ProfileSchema } from "@entities/Profile";
 import { UserSchema } from "@entities/User";
 import { LoginSchema } from "@features/LoginUser";
@@ -9,7 +10,8 @@ export interface StateSchema {
     
     loginForm: LoginSchema;
     registerForm: RegisterSchema;
-    profile: ProfileSchema
+    profile: ProfileSchema;
+    productDetails: ProductDetailsSchema;
 }
 
 export interface ThunkExtraArg {

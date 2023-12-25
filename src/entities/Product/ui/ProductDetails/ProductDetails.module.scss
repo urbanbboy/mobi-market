@@ -1,0 +1,51 @@
+.ProductCard {
+    width: 100%;
+    max-width: 564px;
+    padding: 30px 16px;
+
+    &_info {
+        padding-top: 20px;
+    }
+
+    &_price {
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--font-secondary-color)
+    }
+
+    &_likes {
+        display: flex;
+        justify-content: flex-start;
+        gap: 5px;
+        padding-top: 12px;
+        align-items: center;
+    }
+
+    &_name {
+        padding-top: 20px;
+        font-weight: 700;
+        font-size: var(--font-size-l);
+        color: #494949;
+    }
+
+    &_short {
+        padding-top: 10px;
+        font-weight: 400;
+        font-size: var(--font-size-m);
+        color: #C0C0C0;
+    }
+
+    &_longWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: var(--font-size-l);
+        color: #494949;
+    }
+
+    &_long {
+        font-weight: 400;
+        font-size: var(--font-size-m);
+        color: #C0C0C0;
+    }
+}

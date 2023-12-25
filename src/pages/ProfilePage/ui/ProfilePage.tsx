@@ -5,7 +5,6 @@ import {
     fetchProfileData, 
     getProfileError, 
     getProfileForm, 
-    getProfileIsFinished, 
     getProfileIsLoading, 
     getProfileReadOnly, 
     profileActions 
@@ -19,7 +18,6 @@ export const ProfilePage = () => {
     const formData = useSelector(getProfileForm)
     const isLoading = useSelector(getProfileIsLoading)
     const profileError = useSelector(getProfileError)
-    const isRegisterFinished = useSelector(getProfileIsFinished)
     const readOnly = useSelector(getProfileReadOnly)
     const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
 
@@ -55,7 +53,6 @@ export const ProfilePage = () => {
                 profileError={profileError}
                 data={formData}
                 readOnly={readOnly}
-                isFinished={isRegisterFinished}
                 onChangeFirstName={onChangeFirstName}
                 onChangeLastName={onChangeLastName}
                 onChangeUsername={onChangeUsername}

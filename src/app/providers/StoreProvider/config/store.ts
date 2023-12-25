@@ -5,13 +5,15 @@ import { $api } from "@shared/api/api";
 import { userReducer } from "@entities/User";
 import { registerReducer } from "@features/RegisterUser";
 import { profileReducer } from "@entities/Profile";
+import { productDetailsReducer } from "@entities/Product";
 
 const rootReducer: ReducersMapObject<StateSchema> =  {
     user: userReducer,
 
     registerForm: registerReducer,
     loginForm: loginReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    productDetails: productDetailsReducer
 }
 
 export const store = configureStore({

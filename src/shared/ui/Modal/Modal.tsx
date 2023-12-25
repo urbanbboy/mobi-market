@@ -6,10 +6,11 @@ interface ReactModalProps {
     isOpen: boolean;
     onClose: () => void;
     children: ReactNode;
+    showCloseIcon?: boolean;
 }
 
 export const ReactModal = (props: ReactModalProps) => {
-    const { isOpen, onClose, children } = props
+    const { isOpen, onClose, children, showCloseIcon } = props
 
     const modalStyles = {
         modal: {
@@ -23,7 +24,7 @@ export const ReactModal = (props: ReactModalProps) => {
                 open={isOpen}
                 onClose={onClose}
                 center
-                showCloseIcon={false}
+                showCloseIcon={showCloseIcon}
                 styles={modalStyles}
             >
                 {children}

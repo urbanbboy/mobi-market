@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 
-export const MainPageAsync = lazy(() =>
-    import('./MainPage')
-        .then(({MainPage}) => ({ default: MainPage }))
+export const ProductsPageAsync = lazy(() =>
+    import('./ProductsPage')
+        .then(({ProductsPage}) => ({ default: ProductsPage }))
 );
 
 // export const MainPageAsync = lazy(() => new Promise((resolve) => {

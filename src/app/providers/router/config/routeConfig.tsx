@@ -1,12 +1,12 @@
 import { LoginPage } from '@pages/LoginPage'
-import { MainPage } from '@pages/MainPage'
 import { NotFoundPage } from '@pages/NotFoundPage'
+import { ProductsPage } from '@pages/ProductsPage'
 import { ProfilePage } from '@pages/ProfilePage'
 import { RegisterPage } from '@pages/RegisterPage'
 import { AppRouteProps } from '@shared/types/router'
 
 export enum AppRoutes {
-    MAIN = 'main',
+    PRODUCTS = 'products',
     LOGIN = 'login',
     REGISTER = 'register',
     PROFILE = 'profile',
@@ -16,7 +16,7 @@ export enum AppRoutes {
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
-    [AppRoutes.MAIN]: '/',
+    [AppRoutes.PRODUCTS]: '/',
     [AppRoutes.LOGIN]: '/login',
     [AppRoutes.REGISTER]: '/register',
     [AppRoutes.PROFILE]: '/profile',
@@ -26,9 +26,9 @@ export const RoutePath: Record<AppRoutes, string> = {
 }
 
 export const routeConfig: Record<AppRoutes, AppRouteProps> = {
-    [AppRoutes.MAIN]: {
-        path: RoutePath.main,
-        element: <MainPage />,
+    [AppRoutes.PRODUCTS]: {
+        path: RoutePath.products,
+        element: <ProductsPage />,
         authOnly: true
     },
     [AppRoutes.LOGIN]: {
