@@ -1,0 +1,24 @@
+.Images {
+    width: 142px;
+}
+
+.InfoWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4px;
+    gap: 4px;
+}
+
+.Name {
+    font-size: var(--font-size-s);
+}
+
+.Price {
+    font-size: var(--font-size-s);
+    color: var(--font-secondary-color)
+}
+
+.Likes {
+    display: flex;
+    gap: 10px;
+}

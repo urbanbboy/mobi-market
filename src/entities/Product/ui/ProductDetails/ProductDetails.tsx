@@ -6,12 +6,17 @@ import {
 import { fetchProductById } from "../../model/services/fetchProductById"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { Carousel } from "@shared/ui/ImageCarousel"
-import { Loader } from "@shared/ui/Loader"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import cls from './ProductDetails.module.scss'
+import { PageLoader } from "@widgets/PageLoader"
 
-export const ProductDetails = () => {
+interface ProductDetailsProps {
+    productId: number;
+}
+
+export const ProductDetails = (props: ProductDetailsProps) => {
+    const { productId } = props
     const data = useSelector(getProductDetailsData)
 
     const isLoading = useSelector(getProductDetailsIsLoading)
@@ -19,14 +24,14 @@ export const ProductDetails = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchProductById('1'))
-    }, [dispatch])
+        dispatch(fetchProductById(productId))
+    }, [dispatch, productId])
 
     let content;
 
     if (isLoading) {
         content = (
-            <Loader />
+            <PageLoader isModal />
         )
     } else if (error) {
         content = (
