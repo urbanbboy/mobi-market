@@ -1,9 +1,19 @@
 import { Loader } from "@shared/ui/Loader"
 import cls from './PageLoader.module.scss'
 
-export const PageLoader = () => {
+interface PageLoaderProps {
+    isModal?: boolean;
+}
+
+export const PageLoader = (props: PageLoaderProps) => {
+    const { isModal } = props
+    const loaderClasses = [
+        cls.PageLoader,
+        isModal ? cls.Modal : ''
+    ].join(' ')
+
     return (
-        <div className={cls.PageLoader}>
+        <div className={loaderClasses}>
             <Loader />
         </div>
     )

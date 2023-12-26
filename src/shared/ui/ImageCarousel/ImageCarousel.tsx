@@ -5,10 +5,15 @@ import cls from './ImageCarousel.module.scss'
 
 interface ImageCarouselProps {
     data?: Images[];
+    isCard?: boolean;
 }
 
 export const ImageCarousel = (props: ImageCarouselProps) => {
-    const { data } = props;
+    const { data, isCard } = props;
+    const imageClasses = [
+        cls.Image,
+        isCard ? cls.Card : ''
+    ].join(' ')
 
     if (!data) {
         return <div>Ошибка при загрузке фотографий</div>;
@@ -17,7 +22,7 @@ export const ImageCarousel = (props: ImageCarouselProps) => {
     return (
         <Carousel showArrows showThumbs={false} showStatus={false}>
             {data.map((item) => (
-                <div key={item.id} className={cls.Image}>
+                <div key={item.id} className={imageClasses}>
                     <img src={item.image} alt={`Image ${item.id}`} />
                 </div>
             ))}
