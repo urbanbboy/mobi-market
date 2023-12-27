@@ -1,5 +1,16 @@
 .Images {
     width: 142px;
+
+    &_absent {
+        width: 142px;
+        // width: 154px;
+        height: 85px;
+        background-color: gray;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: var(--font-size-s);
+    }
 }
 
 .InfoWrapper {

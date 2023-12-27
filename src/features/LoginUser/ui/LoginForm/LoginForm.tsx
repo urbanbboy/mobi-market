@@ -13,13 +13,25 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { RoutePath } from '@app/providers/router'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { ResetModal } from './ResetModal/ResetModal'
 
 export const LoginForm = memo(() => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
+    const [open, setOpen] = useState<boolean>(false)
+    
+    
     const { username, password, isLoading, loginError } = useSelector(getLoginState);
     const [errors, setErrors] = useState<Errors>({});
+    
+    const onOpenModal = () => {
+        setOpen(true)
+    } 
 
+    const onCloseModal = () => {
+        setOpen(false)
+    }
+    
     const validateForm = useCallback(() => {
         let hasErrors = false;
         const newErrors: Errors = {};
@@ -39,13 +51,14 @@ export const LoginForm = memo(() => {
 
     const onLoginClick = useCallback( async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        e.stopPropagation()
 
         const hasFormErrors = validateForm();
         if (!hasFormErrors) {
             const result = await dispatch(loginByUsername({ username, password }));
             if(result.meta.requestStatus === 'fulfilled') {
                 // <Navigate to={RoutePath.main} />
-                navigate(RoutePath.main)
+                navigate(RoutePath.products)
             }
         }
     }, [dispatch, username, password, validateForm, navigate]);
@@ -92,7 +105,16 @@ export const LoginForm = memo(() => {
                     {errors.password && <div className={cls.Error}>{errors.password}</div>}
                 </div>
                 <div className={cls.Form_forgot}>
-                    <Link to={'/forgotpassword'} className={cls.Form_forgot_link}>Забыли пароль</Link>
+                    <Button 
+                        theme={ButtonTheme.CLEANED} 
+                        onClick={onOpenModal}
+                    >
+                        Забыли пароль
+                    </Button>
+                    <ResetModal 
+                        onClose={onCloseModal} 
+                        open={open}
+                    />
                 </div>
                 <Button
                     theme={ButtonTheme.CONTAINED}

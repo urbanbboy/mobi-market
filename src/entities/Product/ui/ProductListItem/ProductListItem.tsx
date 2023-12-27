@@ -25,7 +25,10 @@ export const ProductListItem = (props: ProductListItemProps) => {
         <>
             <Card onClick={onOpenModal}>
                 <div className={cls.Images}>
-                    <Carousel isCard data={product.images} />
+                    {product?.images.length === 0 
+                        ? <div className={cls.Images_absent}>фотографии отсутствуют</div>
+                        : <Carousel isCard data={product.images}/> 
+                    }
                 </div>
                 <div className={cls.InfoWrapper}>
                     <div className={cls.Name}>{product.name}</div>

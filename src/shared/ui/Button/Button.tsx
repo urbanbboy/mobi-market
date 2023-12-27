@@ -3,7 +3,8 @@ import cls from './Button.module.scss';
 
 export enum ButtonTheme {
     CONTAINED = 'contained',
-    DISABLED = 'disabled',
+    CONTAINED_WITH_WIDTH = 'contained_with_width',
+    // DISABLED = 'disabled',
     OUTLINED = 'outlined',
     CLEANED = 'cleaned',
     ACTION = 'action',
@@ -13,9 +14,10 @@ export enum ButtonTheme {
 
 const themeClasses = {
     [ButtonTheme.CONTAINED]: cls.contained,
+    [ButtonTheme.CONTAINED_WITH_WIDTH]: cls.contained_with_width,
     [ButtonTheme.CLEANED]: cls.cleaned,
     [ButtonTheme.ACTION]: cls.action,
-    [ButtonTheme.DISABLED]: cls.disabled,
+    // [ButtonTheme.DISABLED]: cls.disabled,
     [ButtonTheme.OUTLINED]: cls.outlined,
     [ButtonTheme.CONTAINED_RED]: cls.contained_red,
     [ButtonTheme.CONTAINED_GREEN]: cls.contained_green,
@@ -42,7 +44,7 @@ export const Button = memo(({
         cls.Button,
         theme ? themeClasses[theme] : '',
         fullWidth ? cls.fullWidth : '',
-        // disabled ? cls.disabled : ''
+        disabled ? cls.disabled : ''
     ].join(' ');
 
     return (

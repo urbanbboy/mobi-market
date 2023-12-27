@@ -25,7 +25,6 @@ export const ProfileCard = (props: ProfileCardProps) => {
         data,
         isLoading,
         profileError,
-        isFinished,
         readOnly,
         onChangeFirstName,
         onChangeLastName,
@@ -114,19 +113,13 @@ export const ProfileCard = (props: ProfileCardProps) => {
                         value={data?.email}
                         onChange={onChangeEmail}
                         placeholder={'почта'}
+                        type='email'
                         fullWidth
                         readOnly={readOnly}
                         isLast
                     />
                 </div>
 
-                {!isFinished && (
-                    <div className={cls.FinishRegister}>
-                        <Button theme={ButtonTheme.CONTAINED}>
-                            Закончить регистрацию
-                        </Button>
-                    </div>
-                )}
             </div>
         </div>
     )

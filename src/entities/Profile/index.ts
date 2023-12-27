@@ -12,7 +12,6 @@ export { getProfileUsername } from './model/selectors/getProfileUsername/getProf
 export { getProfileIsLoading } from './model/selectors/getProfileIsLoading/getProfileIsLoading'
 export { getProfileError } from './model/selectors/getProfileError/getProfileError'
 export { getProfileReadOnly } from './model/selectors/getProfileReadOnly/getProfileReadOnly'
-export { getProfileIsFinished } from './model/selectors/getProfileIsFinished/getProfileIsFinished'
 export { getProfileForm } from './model/selectors/getProfileForm/getProfileForm'
 
 export { fetchProfileData } from './model/services/fetchProfileData/fetchProfileData'

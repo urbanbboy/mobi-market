@@ -3,6 +3,14 @@ export interface LoginSchema {
     password: string;
     isLoading?: boolean;
     loginError?: string | undefined;
+
+    phoneNumber?: string; 
+    phoneIsLoading?: boolean;
+    forgotError?: string | undefined;
+    
+    phoneCode?: string;
+    phoneCodeIsLoading?: boolean;
+    phoneCodeError?: string | undefined;
 }
 
 export interface Errors {

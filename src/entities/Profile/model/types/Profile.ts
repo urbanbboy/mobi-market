@@ -5,6 +5,7 @@ export interface Profile {
     birth_date?: string;
     email?: string;
     phone?: string;
+    photo?: string;
 }
 
 export interface ProfileSchema {

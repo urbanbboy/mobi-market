@@ -1,0 +1,35 @@
+.Form {
+    padding: 44px 111px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.Title {
+    margin-bottom: 42px;
+    color: #000;
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+}
+
+.Logo {
+    width: 80px;
+    height: 80px;
+    padding: 16px;
+    margin-bottom: 32px;
+    border-radius: 20px;
+    background-color: var(--background-secondary-color);
+    box-shadow: 2px 23px 55px -12px rgba(0,0,0,0.72);
+    -webkit-box-shadow: 2px 23px 55px -12px rgba(0,0,0,0.72);
+    -moz-box-shadow: 2px 23px 55px -12px rgba(0,0,0,0.72);
+}
+
+.SubTitle {
+    font-size: var(--font-size-xl);
+    font-weight: 500;
+    padding-bottom: 32px;
+}
+
+.Error {
+    color: hsl(0, 84%, 46%);
+    padding-top: 15px;
+}

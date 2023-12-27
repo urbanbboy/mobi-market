@@ -8,7 +8,7 @@ export const fetchProductList = createAsyncThunk<FetchProductListFulfilledPayloa
         const { extra, rejectWithValue } = thunkAPI
 
         try {
-            const response = await extra.api.get(`/products/?page=${currentPage}`)
+            const response = await extra.api.get(`/products/?page=${currentPage}&limit=32`)
             if (!response) {
                 throw new Error()
             }
