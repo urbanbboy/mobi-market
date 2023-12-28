@@ -7,6 +7,7 @@ import { registerReducer } from "@features/RegisterUser";
 import { profileReducer } from "@entities/Profile";
 import { productDetailsReducer } from "@entities/Product";
 import { productPageReducer } from "@pages/ProductsPage";
+import { favoriteProductsReducer } from "@pages/FavoriteProductsPage";
 
 const rootReducer: ReducersMapObject<StateSchema> =  {
     user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer: ReducersMapObject<StateSchema> =  {
     loginForm: loginReducer,
     profile: profileReducer,
     productDetails: productDetailsReducer,
-    productPage: productPageReducer
+    productPage: productPageReducer,
+    favoriteproductPage: favoriteProductsReducer
 }
 
 export const store = configureStore({

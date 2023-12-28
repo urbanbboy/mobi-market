@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { ThunkExtraArg } from "@app/providers/StoreProvider";
 import { User } from "@entities/User";
-import { USER_ID_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
+import { ACCESS_TOKEN_LOCALSTORAGE_KEY, REFRESH_TOKEN_LOCALSTORAGE_KEY, USER_ID_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
 interface sendCodeProps {
     code: string | undefined
 }
@@ -14,6 +14,8 @@ export const sendCode = createAsyncThunk<User, sendCodeProps, { rejectValue: str
 
         try {
             const response = await extra.api.post(`/users/reset-password/${user_id}/`, code)
+            localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, response.data.access)
+            localStorage.setItem(REFRESH_TOKEN_LOCALSTORAGE_KEY, response.data.refresh)
             return response.data
         } catch (error: any) {
             if (error.response && error.response.status === 400) {

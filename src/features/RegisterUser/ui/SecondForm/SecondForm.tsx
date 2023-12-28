@@ -2,8 +2,8 @@ import { Input } from "@shared/ui/Input"
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import { AuthLoader } from '@shared/ui/AuthLoader/AuthLoader'
 import { memo, useCallback, useEffect, useState } from 'react'
-import cls from './SecondForm.module.scss'
 import { registerActions } from "../../model/slice/registerSlice"
+import cls from './SecondForm.module.scss'
 import { registerUser } from "../../model/service/registerUser/registerUser"
 import { useSelector } from "react-redux"
 import { getRegisterState } from "../../model/selectors/getRegisterState/getRegisterState"

@@ -1,14 +1,14 @@
+import { useSelector } from "react-redux"
+import { useEffect } from "react"
 import { Header } from "@widgets/Header"
 import { ProductList } from "@entities/Product"
-import { useEffect } from "react"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
+import { Pagination } from "@shared/ui/Pagination/Pagination"
 import { fetchProductList } from "../model/services/fetchProductsList"
-import { useSelector } from "react-redux"
 import { getProducts } from "../model/slice/productPageSlice"
 import { getProductPageIsLoading } from "../model/selectors/getProductPageIsLoading/getProductPageIsLoading"
 import { getProductPageError } from "../model/selectors/getProductPageError/getProductPageError"
 import { getProductPage } from "../model/selectors/getProductPage/getProductPage"
-import { Pagination } from "./Pagination/Pagination"
 import cls from './ProductsPage.module.scss'
 
 export const ProductsPage = () => {

@@ -11,6 +11,11 @@ export interface LoginSchema {
     phoneCode?: string;
     phoneCodeIsLoading?: boolean;
     phoneCodeError?: string | undefined;
+
+    resetPassword?: string;
+    resetConfirmPassword?: string;
+    resetIsLoading?: boolean;
+    resetError?: string | undefined;
 }
 
 export interface Errors {

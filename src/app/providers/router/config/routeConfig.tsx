@@ -1,4 +1,7 @@
+
+import { FavoriteProductsPage } from '@pages/FavoriteProductsPage'
 import { LoginPage } from '@pages/LoginPage'
+import { MyProductsPage } from '@pages/MyProductsPage'
 import { NotFoundPage } from '@pages/NotFoundPage'
 import { ProductsPage } from '@pages/ProductsPage'
 import { ProfilePage } from '@pages/ProfilePage'
@@ -47,14 +50,14 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
     },
     [AppRoutes.FAVORITES]: {
         path: RoutePath.favorites,
-        element: <div>favorites page</div>,
+        element: <FavoriteProductsPage />,
         authOnly: true,
         hasSidebar: true
 
     },
     [AppRoutes.MY_PRODUCTS]: {
         path: RoutePath.my_products,
-        element: <div>my products page</div>,
+        element: <MyProductsPage />,
         authOnly: true,
         hasSidebar: true
     },

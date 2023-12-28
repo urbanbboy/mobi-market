@@ -7,8 +7,8 @@ import { ResetPasswordInput } from '../ResetForm/ResetPasswordInput/ResetPasswor
 import { getLoginState } from '../../../../model/selectors/getLoginState/getLoginState'
 import { loginActions } from '../../../../model/slice/loginSlice'
 import { forgotPassword } from '../../../../model/service/forgotPassword/forgotPassword'
-import cls from './FirstResetForm.module.scss'
 import { AuthLoader } from '@shared/ui/AuthLoader/AuthLoader'
+import cls from './FirstResetForm.module.scss'
 
 interface FirstResetFormProps {
     onSuccess: () => void
@@ -29,7 +29,7 @@ export const FirstResetForm = ({ onSuccess }: FirstResetFormProps) => {
     const onClickSendPhoneNumber = useCallback(async (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         e.stopPropagation()
-        
+
         const phone = phoneNumber.replace(/[^\d]/g, '')
         const result = await dispatch(forgotPassword({ phone }))
         if (result.meta.requestStatus === 'fulfilled') {
@@ -44,40 +44,42 @@ export const FirstResetForm = ({ onSuccess }: FirstResetFormProps) => {
     }, [forgotError]);
     return (
         <div className={cls.Form}>
-            <form onSubmit={onClickSendPhoneNumber}>
-                <div className={cls.Title}>Введите номер телефона</div>
-                <img
-                    src={'/phone.svg'}
-                    alt="phone"
-                    className={cls.Logo}
-                />
-                <div className={cls.SubTitle}>Введите номер телефона</div>
-                <p className={cls.Text}>Мы отправим вам СМС с кодом <br /> подтверждения</p>
-                <div className={cls.Input}>
-                    <ResetPasswordInput
-                        isPhoneNumber
-                        onChange={onChangePassword}
-                        value={phoneNumber}
+            <div className={cls.FormWrapper}>
+                <form onSubmit={onClickSendPhoneNumber}>
+                    <div className={cls.Title}>Введите номер телефона</div>
+                    <img
+                        src={'/phone.svg'}
+                        alt="phone"
+                        className={cls.Logo}
                     />
-                </div>
-                {phoneNumber === '' &&
-                    <Button
-                        theme={ButtonTheme.CLEANED}
-                        disabled={true}
-                        fullWidth
-                    >
-                        Далее
-                    </Button>}
-                {phoneNumber.length > 0 &&
-                    <Button
-                        type='submit'
-                        theme={ButtonTheme.CONTAINED_WITH_WIDTH}
-                        disabled={phoneIsLoading}
-                        fullWidth
-                    >
-                        {phoneIsLoading ? <AuthLoader /> : 'Далее'}
-                    </Button>}
-            </form>
+                    <div className={cls.SubTitle}>Введите номер телефона</div>
+                    <p className={cls.Text}>Мы отправим вам СМС с кодом <br /> подтверждения</p>
+                    <div className={cls.Input}>
+                        <ResetPasswordInput
+                            isPhoneNumber
+                            onChange={onChangePassword}
+                            value={phoneNumber}
+                        />
+                    </div>
+                    {phoneNumber === '' &&
+                        <Button
+                            theme={ButtonTheme.CLEANED}
+                            disabled={true}
+                            fullWidth
+                        >
+                            Далее
+                        </Button>}
+                    {phoneNumber.length > 0 &&
+                        <Button
+                            type='submit'
+                            theme={ButtonTheme.CONTAINED_WITH_WIDTH}
+                            disabled={phoneIsLoading}
+                            fullWidth
+                        >
+                            {phoneIsLoading ? <AuthLoader /> : 'Далее'}
+                        </Button>}
+                </form>
+            </div>
         </div>
     )
 }

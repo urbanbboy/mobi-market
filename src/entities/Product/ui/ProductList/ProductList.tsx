@@ -19,7 +19,7 @@ export const ProductList = (props: ProductListProps) => {
             </div>
         )
     }
-    if(error) {
+    if (error) {
         return (
             <div>
                 Ошибка при загрузке товаров
@@ -32,8 +32,9 @@ export const ProductList = (props: ProductListProps) => {
                 ? products.map((item) => (
                     <ProductListItem key={item.id} product={item} />
                 ))
-                : <div>
-                    Нет товаров
+                : <div className={cls.Empty}>
+                    <img src={'/empty.svg'} alt="empty" />
+                    <span className={cls.Title}>Ой пусто</span>
                 </div>
             }
         </div>

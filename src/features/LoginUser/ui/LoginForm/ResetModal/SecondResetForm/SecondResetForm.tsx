@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ResetPasswordInput } from '../ResetForm/ResetPasswordInput/ResetPasswordInput'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
@@ -9,9 +9,14 @@ import cls from './SecondResetForm.module.scss'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import { forgotPassword } from '../../../../model/service/forgotPassword/forgotPassword'
 
-export const SecondResetForm = () => {
+interface SecondResetFormProps {
+    onSuccess: () => void;
+}
+
+export const SecondResetForm = ({ onSuccess }: SecondResetFormProps) => {
     const [isButtonDisabled, setButtonDisabled] = useState<boolean>(false);
     const [countdown, setCountdown] = useState<number>(60);
+    const hasSentRequestRef = useRef<boolean>(false);
 
     const dispatch = useAppDispatch()
     const {
@@ -23,11 +28,11 @@ export const SecondResetForm = () => {
 
     const onChangeCode = useCallback((value: string) => {
         dispatch(loginActions.setCode(value))
-        console.log(value)
+        hasSentRequestRef.current = false;
     }, [dispatch])
 
     useEffect(() => {
-        let timerInterval: NodeJS.Timeout;
+        let timerInterval: number;
 
         if (isButtonDisabled) {
             timerInterval = setInterval(() => {
@@ -41,56 +46,61 @@ export const SecondResetForm = () => {
     }, [isButtonDisabled]);
 
     useEffect(() => {
-        if (code && /^\d{4}$/.test(code)) {
-            dispatch(sendCode({ code }));
+        const fetchCode = async () => {
+            if (code && /^\d{4}$/.test(code) && !hasSentRequestRef.current) {
+                hasSentRequestRef.current = true;
+                const result = await dispatch(sendCode({ code }));
+                if (result.meta.requestStatus === 'fulfilled') {
+                    onSuccess()
+                }
+            }
         }
-    }, [code, dispatch]);
+        fetchCode()
+    }, [code, dispatch, onSuccess]);
 
     const resendCode = () => {
         const phone = phoneNumber.replace(/[^\d]/g, '')
         dispatch(forgotPassword({ phone }))
-        setIsResendEnable(false)
-        if (!setIsResendEnable) {
-            setInterval(() => {
-                setSecondsRemaining((prev) => prev - 1)
-            }, 1000)
-            console.log(secondsRemaining)
-        }
+
+        setButtonDisabled(true)
+
+        setTimeout(() => {
+            setButtonDisabled(false)
+            setCountdown(600)
+            hasSentRequestRef.current = false;
+        }, 60000);
 
     }
 
-    useEffect(() => {
-        if (secondsRemaining === 0) {
-            setIsResendEnable(true)
-        }
-    }, [secondsRemaining])
-
     return (
         <div className={cls.Form}>
-            <div className={cls.Title}>Сброс пароля</div>
-            <img
-                className={cls.Logo}
-                src={'/user.svg'}
-                alt="user"
-            />
-            <div className={cls.SubTitle}>Введите код из СМС</div>
-            <div className={cls.Input}>
-                <ResetPasswordInput
-                    onChange={onChangeCode}
-                    value={code}
+            <div className={cls.FormWrapper}>
+                <div className={cls.Title}>Сброс пароля</div>
+                <img
+                    className={cls.Logo}
+                    src={'/user.svg'}
+                    alt="user"
                 />
+                <div className={cls.SubTitle}>Введите код из СМС</div>
+                <div className={cls.Input}>
+                    <ResetPasswordInput
+                        onChange={onChangeCode}
+                        value={code}
+                    />
+                </div>
+                {phoneCodeError && <div className={cls.Error}>Неверный код</div>}
+                <Button
+                    onClick={resendCode}
+                    theme={ButtonTheme.OUTLINED}
+                    disabled={isButtonDisabled || phoneIsLoading}
+                >
+                    Отправить код еще раз
+                </Button>
+                <div>
+                    {isButtonDisabled && <span>Повторный запрос <br /> 0:{countdown}</span>}
+                </div>
             </div>
-            {phoneCodeError && <div className={cls.Error}>Неверный код</div>}
-            <Button
-                onClick={resendCode}
-                theme={ButtonTheme.OUTLINED}
-                disabled={!isResendEnable || phoneIsLoading}
-            >
-                Отправить код еще раз
-            </Button>
-            <div>
-                {!isResendEnable && <span>Повторный запрос доступен через <br /> 0:{secondsRemaining}</span>}
-            </div>
+
         </div>
     )
 }

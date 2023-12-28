@@ -14,6 +14,9 @@ const initialState: LoginSchema = {
 
     phoneCodeIsLoading: false,
     phoneCode: '',
+
+    resetIsLoading: false,
+    resetError: undefined,
 }
 
 export const loginSlice = createSlice({
@@ -31,6 +34,16 @@ export const loginSlice = createSlice({
         },
         setCode: (state, action: PayloadAction<string>) => {
             state.phoneCode = action.payload
+        },
+        setResetPassword: (state, action: PayloadAction<string>) => {
+            state.resetPassword = action.payload
+        },
+        setResetConfirmPassword: (state, action: PayloadAction<string>) => {
+            state.resetConfirmPassword = action.payload
+        },
+        logout: (state) => {
+            state.username = ''
+            state.password = ''
         }
     },
     extraReducers: (builder) => {

@@ -2,16 +2,19 @@ import { Link } from 'react-router-dom'
 import { RoutePath } from '@app/providers/router'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import { useSelector } from 'react-redux'
-import { getFirstName, getUsername, userActions } from '@entities/User'
+import { userActions } from '@entities/User'
 import cls from './Sidebar.module.scss'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { useState } from 'react'
 import { Modal } from '@shared/ui/Modal'
+import { loginActions } from '@features/LoginUser/model/slice/loginSlice'
+import { getProfileForm } from '@entities/Profile'
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch()
-    const username = useSelector(getUsername)
-    const firstName = useSelector(getFirstName)
+    // const username = useSelector(getUsername)
+    const data = useSelector(getProfileForm)
+    // const firstName = useSelector(getFirstName)
     const [open, setOpen] = useState<boolean>(false)
 
     const onOpenModal = () => {
@@ -24,16 +27,17 @@ export const Sidebar = () => {
 
     const onClickLogout = () => {
         dispatch(userActions.logout())
+        dispatch(loginActions.logout())
     }
 
     return (
         <div className={cls.Sidebar}>
             <div className={cls.Profile}>
                 <Link to={RoutePath.profile} className={cls.Profile_wrapper}>
-                    <div className={cls.Profile_img}></div>
+                    <img src={data?.photo} className={cls.Profile_img}/>
                     <div className={cls.Profile_info}>
-                        <span className={cls.Profile_info_name}>{firstName}</span>
-                        <span className={cls.Profile_info_username}>{username}</span>
+                        <span className={cls.Profile_info_name}>{data?.first_name}</span>
+                        <span className={cls.Profile_info_username}>{data?.username}</span>
                     </div>
                 </Link>
             </div>

@@ -27,3 +27,18 @@ export const registerValidation = Yup.object().shape({
             return this.parent.password === value;
         }),
 });
+
+export const resetValidation = Yup.object().shape({
+    resetPassword: Yup.string()
+        .min(8, "Минимальное количество символов 8")
+        .matches(passwordRegex, "Неверный формат пароля")
+        .required("Пожалуйста, заполните это поле."),
+    resetConfirmPassword: Yup.string()
+        .min(8, "Минимальное количество символов 8")
+        .matches(passwordRegex, "Неверный формат пароля")
+        .oneOf([Yup.ref("resetPassword")], "Пароли не совпадают")
+        .required("Пожалуйста, заполните это поле.")
+        .test('passwords-match', 'Пароли не совпадают', function (value) {
+            return this.parent.resetPassword === value;
+        }),
+});

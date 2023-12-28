@@ -16,7 +16,7 @@ export const Pagination = (props: PaginationProps) => {
         for (let i = 1; i <= totalPages; i++) {
             pageNumbers.push(
                 <Button
-                    theme={currentPage === i ? ButtonTheme.CONTAINED : ButtonTheme.DISABLED}
+                    theme={currentPage === i ? ButtonTheme.CONTAINED_GREEN : ButtonTheme.OUTLINED}
                     key={i}
                     onClick={() => onPageChange(i)}
                     disabled={currentPage === i}

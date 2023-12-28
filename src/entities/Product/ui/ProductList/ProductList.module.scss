@@ -10,3 +10,16 @@
     justify-content: center;
     align-items: center;
 }
+
+.Title {
+    font-weight: 700;
+    font-size: var(--font-size-l);
+}
+
+.Empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
