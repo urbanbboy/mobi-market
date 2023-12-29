@@ -1,6 +1,8 @@
+import { fetchFavoriteProductsList } from './../../../../pages/FavoriteProductsPage/model/services/fetchFavoriteProductsList';
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { ThunkConfig } from "@app/providers/StoreProvider";
 import { Product } from "../types/Product";
+import { fetchProductList } from "@pages/ProductsPage/model/services/fetchProductsList";
 
     
 export const likeProductById = createAsyncThunk<Product, number, ThunkConfig<string>>(

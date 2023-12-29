@@ -10,6 +10,7 @@ import { getProductPageIsLoading } from "../model/selectors/getProductPageIsLoad
 import { getProductPageError } from "../model/selectors/getProductPageError/getProductPageError"
 import { getProductPage } from "../model/selectors/getProductPage/getProductPage"
 import cls from './ProductsPage.module.scss'
+import { fetchProfileData } from "@entities/Profile"
 
 export const ProductsPage = () => {
     const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ export const ProductsPage = () => {
 
     useEffect(() => {
         dispatch(fetchProductList(currentPage))
+        dispatch(fetchProfileData())
     }, [dispatch, currentPage])
 
     const handlePageChange = (newPage: number) => {
@@ -31,6 +33,8 @@ export const ProductsPage = () => {
             <Header />
             <div className={cls.ProductContent}>
                 <ProductList
+                    fetchUpdatedData={fetchProductList}
+                    currentPage={currentPage}
                     products={products}
                     isLoading={isLoading}
                     error={error}

@@ -9,7 +9,7 @@ const productsAdapter = createEntityAdapter({
 })
 
 export const getProducts = productsAdapter.getSelectors<StateSchema>(
-    (state) => state.productPage || productsAdapter.getInitialState()
+    (state) => state.favoriteproductPage || productsAdapter.getInitialState()
 )
 
 export const favoriteProductsPageSlice = createSlice({
@@ -24,7 +24,18 @@ export const favoriteProductsPageSlice = createSlice({
         entities: {},
     }),
     reducers: {
-        
+        likeProduct: (state, action) => {
+            const product = state.entities[action.payload]
+            if(product) {
+                product.liked_by_current_user = true
+            }
+        },
+        unlikeProduct: (state, action) => {
+            const product = state.entities[action.payload]
+            if(product) {
+                product.liked_by_current_user = false
+            }
+        }   
     },
     extraReducers: (builder) => {
         builder
@@ -38,7 +49,7 @@ export const favoriteProductsPageSlice = createSlice({
                 state.isLoading = false
                 state.currentPage = payload.page
                 state.totalPages = Math.ceil(payload.count / 32)
-                state.totalItems = payload.count
+                state.totalItems = payload.count,
                 productsAdapter.setAll(state, payload.results);
             })
             .addCase(fetchFavoriteProductsList.rejected, (state, action) => {
@@ -49,4 +60,5 @@ export const favoriteProductsPageSlice = createSlice({
     
 })
 
+export const { actions: favoriteProductsActions } = favoriteProductsPageSlice
 export const { reducer: favoriteProductsReducer } = favoriteProductsPageSlice

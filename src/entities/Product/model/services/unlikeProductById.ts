@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { ThunkConfig } from "@app/providers/StoreProvider";
 import { Product } from "../types/Product";
 
-    
+
 export const unlikeProductById = createAsyncThunk<Product, number, ThunkConfig<string>>(
     'unlikeProduct/unlikeProductById',
     async (productId, thunkAPI) => {
@@ -10,14 +10,16 @@ export const unlikeProductById = createAsyncThunk<Product, number, ThunkConfig<s
 
         try {
             const response = await extra.api.delete(`/products/unlike/${productId}/`)
-            if(!response) {
+            if (!response) {
                 throw new Error()
             }
 
             return response.data
         } catch (error: any) {
             console.log(error)
-            rejectWithValue('Произошла ошибка при удалении товара')
+            if (error.response && error.response.status === 400) {
+                return rejectWithValue('Вы уже добавили данный товар в "Понравившиеся"');
+            }
         }
 
     }

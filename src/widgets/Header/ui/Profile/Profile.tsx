@@ -1,17 +1,17 @@
-import { useSelector } from 'react-redux'
-import cls from './Profile.module.scss'
-import { getUsername } from '@entities/User'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { RoutePath } from '@app/providers/router'
+import { getProfileForm } from '@entities/Profile'
+import cls from './Profile.module.scss'
 
 export const Profile = () => {
-    const username = useSelector(getUsername)
+    const data = useSelector(getProfileForm)
 
     return (
         <div className={cls.Profile}>
-            <div>{username}</div>
+            <div>{data?.username}</div>
             <Link to={RoutePath.profile}>
-                <div className={cls.Profile_img}></div>
+                <img src={data?.photo} alt="avatar" className={cls.Avatar} />
             </Link>
         </div>
     )

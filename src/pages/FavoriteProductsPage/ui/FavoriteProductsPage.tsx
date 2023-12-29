@@ -39,6 +39,8 @@ export const FavoriteProductsPage = () => {
             </div>
             <div className={cls.ProductContent}>
                 <ProductList
+                    fetchUpdatedData={fetchFavoriteProductsList}
+                    currentPage={currentPage}
                     products={products}
                     isLoading={isLoading}
                     error={error}
