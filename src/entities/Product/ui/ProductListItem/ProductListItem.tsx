@@ -1,6 +1,5 @@
 import { Carousel } from "@shared/ui/ImageCarousel";
 import { Product } from "../../model/types/Product";
-import cls from './ProductListItem.module.scss'
 import { Card } from "@shared/ui/Card";
 import { useCallback, useState } from "react";
 import { ProductDetailsModal } from "../ProductDetailsModal/ProductDetailsModal";
@@ -10,6 +9,9 @@ import { likeProductById, unlikeProductById } from "@entities/Product";
 import { toast } from "react-toastify";
 import { fetchProductList } from "@pages/ProductsPage/model/services/fetchProductsList";
 import { fetchFavoriteProductsList } from "@pages/FavoriteProductsPage/model/services/fetchFavoriteProductsList";
+import { Modal } from "@shared/ui/Modal";
+import { Button, ButtonTheme } from "@shared/ui/Button";
+import cls from './ProductListItem.module.scss'
 
 interface ProductListItemProps {
     product: Product;
@@ -20,20 +22,28 @@ interface ProductListItemProps {
 export const ProductListItem = (props: ProductListItemProps) => {
     const { product, currentPage, fetchUpdatedData } = props
     const [open, setOpen] = useState<boolean>(false)
+    const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
     const dispatch = useAppDispatch()
 
-    const onOpenModal = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault()
+    const onOpenModal = useCallback(() => {
         setOpen(true)
-    }
+    }, [])
 
-    const onCloseModal = () => {
+    const onCloseModal = useCallback(() => {
         setOpen(false)
+    }, [])
+
+    const openProductDeleteModal = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setOpenDeleteModal(true)
     }
 
-    const handleClickLike = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation()
-        e.preventDefault()
+    const onCloseProductDeleteModal = useCallback(() => {
+        setOpenDeleteModal(false)
+    }, [])
+
+    const handleClickLike = useCallback(async () => {
         if (product.liked_by_current_user) {
             const result = await dispatch(unlikeProductById(product.id))
             if (result.meta.requestStatus === 'fulfilled') {
@@ -53,9 +63,10 @@ export const ProductListItem = (props: ProductListItemProps) => {
 
     }, [product, dispatch, currentPage, fetchUpdatedData])
 
+
     return (
         <>
-            <Card onClick={(e) => onOpenModal(e)}>
+            <Card onClick={onOpenModal}>
                 <div className={cls.Images}>
                     {product?.images.length === 0
                         ? <div className={cls.Images_absent}>фотографии отсутствуют</div>
@@ -67,7 +78,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
                     <div className={cls.Price}>{product.price}</div>
                     <div className={cls.Likes}>
                         <img
-                            onClick={(e) => handleClickLike(e)}
+                            onClick={openProductDeleteModal}
                             src={product.liked_by_current_user ? '/like.svg' : '/no_like.svg'}
                             alt="likes"
                         />
@@ -76,6 +87,40 @@ export const ProductListItem = (props: ProductListItemProps) => {
                 </div>
             </Card>
             <ProductDetailsModal open={open} onCloseModal={onCloseModal} productId={product.id} />
+            <Modal
+                showCloseIcon={false}
+                onClose={onCloseModal}
+                isOpen={openDeleteModal}
+            >
+                <div className={cls.Modal}>
+                    <img src={'/trash.svg'} alt="logout" />
+                    <div className={cls.Modal_title}>
+                        {product.liked_by_current_user 
+                            ? 'Вы действительно хотите удалить данный товар?' 
+                            : 'Вы действительно хотите добавить данный товар?'
+                        }
+                    </div>
+                    <div className={cls.Modal_buttons}>
+                        <Button
+                            theme={ButtonTheme.CONTAINED}
+                            fullWidth
+                            onClick={handleClickLike}
+                        >
+                            {product.liked_by_current_user
+                                ? "Удалить" 
+                                : "Добавить"
+                            }
+                        </Button>
+                        <Button
+                            theme={ButtonTheme.OUTLINED}
+                            fullWidth
+                            onClick={onCloseProductDeleteModal}
+                        >
+                            Отмена
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </>
 
     )

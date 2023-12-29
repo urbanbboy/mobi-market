@@ -1,34 +1,36 @@
+import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { RoutePath } from '@app/providers/router'
-import { Button, ButtonTheme } from '@shared/ui/Button'
 import { useSelector } from 'react-redux'
-import { userActions } from '@entities/User'
-import cls from './Sidebar.module.scss'
-import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { useState } from 'react'
-import { Modal } from '@shared/ui/Modal'
+import { RoutePath } from '@app/providers/router'
 import { loginActions } from '@features/LoginUser/model/slice/loginSlice'
-import { getProfileForm } from '@entities/Profile'
+import { userActions } from '@entities/User'
+import { fetchProfileData, getProfileForm } from '@entities/Profile'
+import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { Modal } from '@shared/ui/Modal'
+import { Button, ButtonTheme } from '@shared/ui/Button'
+import cls from './Sidebar.module.scss'
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch()
-    // const username = useSelector(getUsername)
     const data = useSelector(getProfileForm)
-    // const firstName = useSelector(getFirstName)
     const [open, setOpen] = useState<boolean>(false)
 
-    const onOpenModal = () => {
+    useEffect(() => {
+        dispatch(fetchProfileData())
+    }, [dispatch])
+
+    const onOpenModal = useCallback(() => {
         setOpen(true)
-    }
+    }, [])
 
-    const onCloseModal = () => {
+    const onCloseModal = useCallback(() => {
         setOpen(false)
-    }
+    }, [])
 
-    const onClickLogout = () => {
+    const onClickLogout = useCallback(() => {
         dispatch(userActions.logout())
         dispatch(loginActions.logout())
-    }
+    }, [dispatch])
 
     return (
         <div className={cls.Sidebar}>
