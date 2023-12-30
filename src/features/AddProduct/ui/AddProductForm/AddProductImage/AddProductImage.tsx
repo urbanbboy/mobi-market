@@ -10,11 +10,12 @@ export const AddProductImage = () => {
         }
     };
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
+    const onChangeHandler = () => {
+        // const file = e.target.files?.[0];
         // if (setSelectedFile) {
         //     setSelectedFile(file)
         // }
+        console.log('it should be a file, but Im late')
     };
 
     return (
