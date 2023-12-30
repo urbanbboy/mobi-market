@@ -11,7 +11,7 @@ export const RegisterPage = () => {
                 <div className={cls.RegisterPage_form}>
                     <div className={cls.RegisterPage_goBack}>
                         <Link to={RoutePath.login}>
-                            <img src="/public/left_arrow.svg" alt="left-arrow" />
+                            <img src="/left_arrow.svg" alt="left-arrow" />
                             <span>Назад</span>
                         </Link>
                     </div>

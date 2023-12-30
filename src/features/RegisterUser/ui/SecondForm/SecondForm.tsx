@@ -76,7 +76,7 @@ export const SecondForm = memo(() => {
     return (
         <div className={cls.Form}>
             <div className={cls.Form_info}>
-                <img src="/public/lock.svg" alt="password" />
+                <img src="/lock.svg" alt="password" />
                 <div>Придумайте пароль</div>
                 <p>Минимальная длина — 8 символов. Для надежности пароль должен содержать буквы и цифры.</p>
             </div>
