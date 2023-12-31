@@ -93,7 +93,10 @@ export const ProductListItem = (props: ProductListItemProps) => {
                 isOpen={openDeleteModal}
             >
                 <div className={cls.Modal}>
-                    <img src={'/trash.svg'} alt="logout" />
+                    <img 
+                        src={product.liked_by_current_user ? '/trash.svg' : '/heart.svg'} 
+                        alt="logout" 
+                    />
                     <div className={cls.Modal_title}>
                         {product.liked_by_current_user 
                             ? 'Вы действительно хотите удалить данный товар?' 
