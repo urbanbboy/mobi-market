@@ -38,7 +38,7 @@ export const productPageSlice = createSlice({
                 const payload: FetchProductListFulfilledPayload = action.payload
 
                 state.isLoading = false
-                state.currentPage = payload.page
+                state.currentPage = payload?.page
                 state.totalPages = Math.ceil(payload.count / 32)
                 state.totalItems = payload.count
                 productsAdapter.setAll(state, payload.results);

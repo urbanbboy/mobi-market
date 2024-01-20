@@ -1,5 +1,3 @@
-// api.ts
-
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
 import axios, { AxiosInstance } from "axios";
 

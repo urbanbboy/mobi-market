@@ -9,19 +9,24 @@ export const refreshAccessToken = createAsyncThunk<User, void, { rejectValue: st
         const { extra, rejectWithValue } = thunkAPI;
 
         try {
-            const response = await extra.api.post('/users/login/refresh/', {
-                refresh: localStorage.getItem(REFRESH_TOKEN_LOCALSTORAGE_KEY),
-            });
+            if (ACCESS_TOKEN_LOCALSTORAGE_KEY === undefined) {
+                const response = await extra.api.post('/users/login/refresh/', {
+                    refresh: localStorage.getItem(REFRESH_TOKEN_LOCALSTORAGE_KEY),
+                });
 
-            const newAccessToken = response.data.access;
+                const newAccessToken = response.data.access;
+                const newRefreshToken = response.data.refresh;
 
-            localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, newAccessToken);
-            thunkAPI.dispatch(userActions.setAuthData(response.data));
+                localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, newAccessToken);
+                localStorage.setItem(REFRESH_TOKEN_LOCALSTORAGE_KEY, newRefreshToken);
+                thunkAPI.dispatch(userActions.setAuthData(response.data));
 
-            return response.data;
+                return response.data;
+            }
         } catch (error: any) {
             console.error('Ошибка обновления токена:', error);
             return rejectWithValue('Ошибка обновления токена');
         }
+
     }
 );

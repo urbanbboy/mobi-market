@@ -1,9 +1,9 @@
 import { fetchFavoriteProductsList } from "@pages/FavoriteProductsPage/model/services/fetchFavoriteProductsList";
+import { fetchProductList } from "@pages/ProductsPage/model/services/fetchProductsList";
 import { Product } from "../../model/types/Product";
 import { ProductListItem } from "../ProductListItem/ProductListItem";
-import cls from './ProductList.module.scss'
 import { Loader } from "@shared/ui/Loader";
-import { fetchProductList } from "@pages/ProductsPage/model/services/fetchProductsList";
+import cls from './ProductList.module.scss'
 
 interface ProductListProps {
     products: Product[];

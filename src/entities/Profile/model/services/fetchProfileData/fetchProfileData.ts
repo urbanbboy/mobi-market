@@ -11,6 +11,7 @@ export const fetchProfileData = createAsyncThunk<Profile, void, ThunkConfig<stri
         try {
             const response = await extra.api.get('/users/me/')
             return response.data
+            console.log(response.data)
         } catch (error: any) {
             console.log(error)
             rejectWithValue('Произошла ошибка при загрузке страницы профиля')
