@@ -1,6 +1,7 @@
 import { ProductDetailsSchema } from "@entities/Product";
 import { ProfileSchema } from "@entities/Profile";
 import { UserSchema } from "@entities/User";
+import { AddProductType } from "@features/AddProduct";
 import { LoginSchema } from "@features/LoginUser";
 import { RegisterSchema } from "@features/RegisterUser";
 import { favoriteProductPageSchema } from "@pages/FavoriteProductsPage/model/types/favoriteProductPageSchema";
@@ -16,6 +17,7 @@ export interface StateSchema {
     productDetails: ProductDetailsSchema;
     productPage: productPageSchema;
     favoriteproductPage: favoriteProductPageSchema;
+    addProduct: AddProductType;
 }
 
 export interface ThunkExtraArg {

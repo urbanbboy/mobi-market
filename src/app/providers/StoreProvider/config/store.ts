@@ -8,6 +8,7 @@ import { profileReducer } from "@entities/Profile";
 import { productDetailsReducer } from "@entities/Product";
 import { productPageReducer } from "@pages/ProductsPage";
 import { favoriteProductsReducer } from "@pages/FavoriteProductsPage";
+import { addProductReducer } from "@features/AddProduct";
 
 const rootReducer: ReducersMapObject<StateSchema> =  {
     user: userReducer,
@@ -17,7 +18,8 @@ const rootReducer: ReducersMapObject<StateSchema> =  {
     profile: profileReducer,
     productDetails: productDetailsReducer,
     productPage: productPageReducer,
-    favoriteproductPage: favoriteProductsReducer
+    favoriteproductPage: favoriteProductsReducer,
+    addProduct: addProductReducer
 }
 
 export const store = configureStore({

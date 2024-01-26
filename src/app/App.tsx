@@ -5,7 +5,6 @@ import { getUserInited, userActions } from "@entities/User"
 import { useSelector } from "react-redux"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { PageLoader } from "@widgets/PageLoader"
-import { refreshAccessToken } from "@features/LoginUser"
 
 function App() {
     const dispatch = useAppDispatch()
@@ -13,7 +12,6 @@ function App() {
 
     useEffect(() => {
         dispatch(userActions.initAuthData())
-        dispatch(refreshAccessToken())
     }, [dispatch])
 
     if(!inited) {

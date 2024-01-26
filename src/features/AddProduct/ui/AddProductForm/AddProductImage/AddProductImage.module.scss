@@ -1,0 +1,38 @@
+.upload_image {
+    &_wrapper {
+        padding-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    &_button {
+        width: 76px;
+        height: 96px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            padding-bottom: 6px;
+        }
+    }
+}
+
+.container {
+    position: relative;
+}
+
+.image_item {
+    border-radius: 12px;
+    width: 76px;
+    height: 96px;
+    object-fit: cover;
+
+    &_remove {
+        position: absolute;
+        bottom: 7px;
+        right: 8px;
+    }
+}
