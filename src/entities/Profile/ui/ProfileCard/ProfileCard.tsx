@@ -60,7 +60,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
             <div className={cls.Data}>
                 <div className={cls.UserInfo_avatar}>
                     <Avatar 
-                        data={data?.photo} 
+                        photo={data?.photo} 
                         readOnly={readOnly}
                         setSelectedFile={setSelectedFile}
                     />

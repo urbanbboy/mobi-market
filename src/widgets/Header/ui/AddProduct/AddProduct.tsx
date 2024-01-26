@@ -1,6 +1,6 @@
-import { Button, ButtonTheme } from "@shared/ui/Button"
-import { CreateProductModal } from "@shared/ui/CreateProductModal"
 import { useCallback, useState } from "react"
+import { AddProductModal } from "@features/AddProduct"
+import { Button, ButtonTheme } from "@shared/ui/Button"
 
 export const AddProduct = () => {
     const [open ,setOpen] = useState<boolean>(false)
@@ -21,7 +21,7 @@ export const AddProduct = () => {
             >
                 Подать объявление
             </Button>
-            <CreateProductModal open={open} onClose={onCloseModal} />
+            <AddProductModal open={open} onClose={onCloseModal} />
         </>
     )
 }

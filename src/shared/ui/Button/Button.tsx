@@ -4,7 +4,6 @@ import cls from './Button.module.scss';
 export enum ButtonTheme {
     CONTAINED = 'contained',
     CONTAINED_WITH_WIDTH = 'contained_with_width',
-    // DISABLED = 'disabled',
     OUTLINED = 'outlined',
     CLEANED = 'cleaned',
     ACTION = 'action',
@@ -17,7 +16,6 @@ const themeClasses = {
     [ButtonTheme.CONTAINED_WITH_WIDTH]: cls.contained_with_width,
     [ButtonTheme.CLEANED]: cls.cleaned,
     [ButtonTheme.ACTION]: cls.action,
-    // [ButtonTheme.DISABLED]: cls.disabled,
     [ButtonTheme.OUTLINED]: cls.outlined,
     [ButtonTheme.CONTAINED_RED]: cls.contained_red,
     [ButtonTheme.CONTAINED_GREEN]: cls.contained_green,

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { RoutePath } from '@app/providers/router'
 import { loginActions } from '@features/LoginUser/model/slice/loginSlice'
 import { userActions } from '@entities/User'
-import { fetchProfileData, getProfileForm } from '@entities/Profile'
+import { fetchProfileData, getProfileFirstName, getProfilePhoto, getProfileUsername } from '@entities/Profile'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Modal } from '@shared/ui/Modal'
 import { Button, ButtonTheme } from '@shared/ui/Button'
@@ -12,7 +12,9 @@ import cls from './Sidebar.module.scss'
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch()
-    const data = useSelector(getProfileForm)
+    const photo = useSelector(getProfilePhoto)
+    const firstName = useSelector(getProfileFirstName)
+    const username = useSelector(getProfileUsername)
     const [open, setOpen] = useState<boolean>(false)
 
     useEffect(() => {
@@ -36,10 +38,10 @@ export const Sidebar = () => {
         <div className={cls.Sidebar}>
             <div className={cls.Profile}>
                 <Link to={RoutePath.profile} className={cls.Profile_wrapper}>
-                    <img src={data?.photo} className={cls.Profile_img}/>
+                    <img src={photo} className={cls.Profile_img}/>
                     <div className={cls.Profile_info}>
-                        <span className={cls.Profile_info_name}>{data?.first_name}</span>
-                        <span className={cls.Profile_info_username}>{data?.username}</span>
+                        <span className={cls.Profile_info_name}>{firstName}</span>
+                        <span className={cls.Profile_info_username}>{username}</span>
                     </div>
                 </Link>
             </div>

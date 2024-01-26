@@ -1,30 +1,22 @@
-import { AddProductForm } from "@features/AddProduct";
+import React from "react";
 import Modal from "react-responsive-modal"
 
 interface CreateProductModalProps {
+    children: React.ReactNode;
     open: boolean;
     onClose: () => void;
 }
 
 export const CreateProductModal = (props: CreateProductModalProps) => {
-    const { onClose, open } = props
+    const { onClose, open, children } = props
 
-    const modalStyles = {
-        modal: {
-            fontFamily: 'Inter', 
-            width: '564px'
-        }
-    }
+
 
     return (
         <Modal
-            onClose={onClose}
-            open={open}
-            showCloseIcon={false}
-            center
-            styles={modalStyles}
+
         >
-            <AddProductForm />
+            {children}
         </Modal>
     )
 }

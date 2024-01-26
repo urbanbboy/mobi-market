@@ -3,14 +3,14 @@ import cls from './Avatar.module.scss'
 import { Button, ButtonTheme } from '@shared/ui/Button';
 
 interface AvatarProps {
-    data?: File | string;
+    photo?: File | string;
     readOnly?: boolean;
     setSelectedFile?: (value?: File | undefined) => void;
 }
 
 export const Avatar = (props: AvatarProps) => {
     const {
-        data,
+        photo,
         readOnly,
         setSelectedFile
     } = props
@@ -29,7 +29,7 @@ export const Avatar = (props: AvatarProps) => {
         }
     };
 
-    const imageUrl = typeof data === 'string' ? data : data?.name;
+    const imageUrl = typeof photo === 'string' ? photo : photo?.name;
 
     return (
         <div className={cls.Avatar}>
