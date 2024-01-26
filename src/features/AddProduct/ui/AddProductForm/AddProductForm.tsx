@@ -79,13 +79,14 @@ export const AddProductForm = (props: AddProductFormProps) => {
                 dispatch(addProductActions.resetValues())
                 await dispatch(fetchProductList(currentPage))
             } else {
-                toast.error('Ошибка при добавлении нового товара. Попробуйте еще раз');
+                toast.error(error);
             }
         } catch (error) {
+            console.log('Ошибка при добавлении нового товара. Попробуйте еще раз')
             console.log(error)
         }
 
-    }, [dispatch, full_description, selectedImages, name, price, short_description, onClose, currentPage])
+    }, [dispatch, full_description, selectedImages, name, price, short_description, onClose, currentPage, error])
 
     return (
         <div className={cls.Form}>
