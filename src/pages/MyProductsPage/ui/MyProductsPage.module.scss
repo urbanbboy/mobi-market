@@ -1,0 +1,50 @@
+.Products {
+    width: 100%;
+    padding: 23px 124px;
+}
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+.goBack {
+    cursor: pointer;
+}
+
+.goBack a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: var(--font-size-m);
+    color: #000;
+    text-decoration: none;
+    gap: 6px;
+}
+
+.goBack img {
+    padding: 10px 16px;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.Title {
+    font-weight: 700;
+    font-size: var(--font-size-l);
+}
+
+.ProductContent {
+    padding-top: 60px;
+}
+
+.Pagination {
+    position: fixed;
+    bottom: 30px;
+    right: 37%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

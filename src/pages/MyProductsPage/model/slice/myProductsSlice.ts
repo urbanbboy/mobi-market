@@ -1,20 +1,20 @@
 import { StateSchema } from "@app/providers/StoreProvider";
 import { Product } from "@entities/Product";
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { FetchFavoriteProductListFulfilledPayload, favoriteProductPageSchema } from "../types/favoriteProductPageSchema";
-import { fetchFavoriteProductsList } from "../services/fetchFavoriteProductsList";
+import { FetchMyProductsListFulfilledPayload, myProductsPageSchema } from "../types/myProductsPageSchema";
+import { fetchMyProductsList } from "../service/fetchMyProductsList";
 
 const productsAdapter = createEntityAdapter({
     selectId: (product: Product) => product.id
 })
 
 export const getProducts = productsAdapter.getSelectors<StateSchema>(
-    (state) => state.favoriteProductPage || productsAdapter.getInitialState()
+    (state) => state.myProductsPage || productsAdapter.getInitialState()
 )
 
-export const favoriteProductsPageSlice = createSlice({
-    name: 'favoriteProducts',
-    initialState: productsAdapter.getInitialState<favoriteProductPageSchema>({
+export const MyProductsPageSlice = createSlice({
+    name: 'myProducts',
+    initialState: productsAdapter.getInitialState<myProductsPageSchema>({
         isLoading: false,
         error: undefined,
         currentPage: 1,
@@ -39,20 +39,20 @@ export const favoriteProductsPageSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchFavoriteProductsList.pending, (state) => {
+            .addCase(fetchMyProductsList.pending, (state) => {
                 state.isLoading = true
                 state.error = undefined
             })
-            .addCase(fetchFavoriteProductsList.fulfilled, (state, action) => {
-                const payload: FetchFavoriteProductListFulfilledPayload = action.payload
+            .addCase(fetchMyProductsList.fulfilled, (state, action) => {
+                const payload: FetchMyProductsListFulfilledPayload = action.payload
 
                 state.isLoading = false
                 state.currentPage = payload.page
+                state.totalItems = payload.count
                 state.totalPages = Math.ceil(payload.count / 32)
-                state.totalItems = payload.count,
                 productsAdapter.setAll(state, payload.results);
             })
-            .addCase(fetchFavoriteProductsList.rejected, (state, action) => {
+            .addCase(fetchMyProductsList.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.payload
             })
@@ -60,5 +60,5 @@ export const favoriteProductsPageSlice = createSlice({
     
 })
 
-export const { actions: favoriteProductsActions } = favoriteProductsPageSlice
-export const { reducer: favoriteProductsReducer } = favoriteProductsPageSlice
+export const { actions: myProductsActions } = MyProductsPageSlice
+export const { reducer: myProductsReducer } = MyProductsPageSlice

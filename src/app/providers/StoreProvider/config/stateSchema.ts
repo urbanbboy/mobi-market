@@ -1,12 +1,13 @@
-import { ProductDetailsSchema } from "@entities/Product";
-import { ProfileSchema } from "@entities/Profile";
-import { UserSchema } from "@entities/User";
-import { AddProductType } from "@features/AddProduct";
-import { LoginSchema } from "@features/LoginUser";
-import { RegisterSchema } from "@features/RegisterUser";
-import { favoriteProductPageSchema } from "@pages/FavoriteProductsPage/model/types/favoriteProductPageSchema";
-import { productPageSchema } from "@pages/ProductsPage";
 import { AxiosInstance } from "axios";
+import { AddProductType } from "@features/AddProduct";
+import { RegisterSchema } from "@features/RegisterUser";
+import { favoriteProductPageSchema } from "@pages/FavoriteProductsPage";
+import { myProductsPageSchema } from "@pages/MyProductsPage";
+import { productPageSchema } from "@pages/ProductsPage";
+import { LoginSchema } from "@features/LoginUser";
+import { ProductDetailsSchema } from "@entities/Product";
+import { UserSchema } from "@entities/User";
+import { ProfileSchema } from "@entities/Profile";
 
 export interface StateSchema {
     user: UserSchema;
@@ -16,8 +17,9 @@ export interface StateSchema {
     profile: ProfileSchema;
     productDetails: ProductDetailsSchema;
     productPage: productPageSchema;
-    favoriteproductPage: favoriteProductPageSchema;
+    favoriteProductPage: favoriteProductPageSchema;
     addProduct: AddProductType;
+    myProductsPage: myProductsPageSchema;
 }
 
 export interface ThunkExtraArg {

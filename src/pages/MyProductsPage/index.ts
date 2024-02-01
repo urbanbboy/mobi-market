@@ -1,3 +1,4 @@
-import { MyProductsPageAsync } from "./ui/MyProductsPageAsync";
 
-export { MyProductsPageAsync as MyProductsPage }
+export { MyProductsPageAsync as MyProductsPage } from "./ui/MyProductsPageAsync";
+export { myProductsReducer } from "./model/slice/myProductsSlice";
+export type { myProductsPageSchema } from "./model/types/myProductsPageSchema";
