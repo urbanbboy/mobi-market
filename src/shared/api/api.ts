@@ -1,6 +1,6 @@
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
 import axios, { AxiosInstance } from "axios";
-// import { refreshAccessToken } from "./refreshAccessTpken";
+import { refreshAccessToken } from "./refreshAccessToken";
 
 const BASE_URL = 'https://neobook.online/mobi-market';
 
@@ -17,28 +17,17 @@ const createApi = () => {
         return config;
     });
 
-    // api.interceptors.response.use(
-    //     (response) => response,
-    //     async (error: AxiosError) => {
-    //         const originalRequest = error.config;
-    //         if (error.response?.status === 401 && localStorage.getItem(REFRESH_TOKEN_LOCALSTORAGE_KEY)) {
-    //             try {
-    //                 const newAccessToken = await refreshAccessToken();
-    //                 if (originalRequest) {
-    //                     originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-    //                     return axios(originalRequest);
-    //                 } else {
-    //                     console.error("Original request is undefined");
-    //                 }
-    //             } catch (refreshError) {
-    //                 console.error("Error refreshing access token:", refreshError);
-    //                 location.href = '/login'
-    //             }
-    //         }
-
-    //         return Promise.reject(error);
-    //     }
-    // );
+    api.interceptors.response.use((response) => {
+        return response
+    }, async function (error) {
+        const originalRequest = error.config;
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            const access_token = await refreshAccessToken();
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+            return api(originalRequest);
+        }
+    })
 
     return api;
 };

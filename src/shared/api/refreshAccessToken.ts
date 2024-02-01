@@ -12,5 +12,5 @@ export const refreshAccessToken = async () => {
     localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, newAccessToken)
     localStorage.setItem(REFRESH_TOKEN_LOCALSTORAGE_KEY, newRefreshToken)
 
-    return newRefreshToken;
+    return newAccessToken;
 };
