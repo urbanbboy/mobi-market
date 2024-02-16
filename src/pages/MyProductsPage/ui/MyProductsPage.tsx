@@ -44,6 +44,7 @@ export const MyProductsPage = () => {
                     products={products}
                     isLoading={isLoading}
                     error={error}
+                    isEditable={true}
                 />
             </div>
             <div className={cls.Pagination}>

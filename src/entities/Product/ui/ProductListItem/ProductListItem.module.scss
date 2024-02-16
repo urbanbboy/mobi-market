@@ -21,8 +21,15 @@
     gap: 4px;
 }
 
+.Info {
+    cursor: pointer;
+}
+
 .Name {
     font-size: var(--font-size-s);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Price {
@@ -30,11 +37,39 @@
     color: var(--font-secondary-color)
 }
 
+.Likes_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .Likes {
     display: flex;
     gap: 10px;
 }
 
+.Likes img {
+    cursor: pointer;
+}
+
+.Details {
+    cursor: pointer;
+    margin-right: 10px;
+    height: 20px;
+    width: 15px;
+}
+
+.Dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.Option {
+    img {
+        padding: 4px;
+        border-radius: 6px;
+        background-color: var(--background-secondary-color);
+    }
+}
 
 .Modal {
     display: flex;
@@ -49,4 +84,13 @@
         font-size: var(--font-size-m);
         width: 70%;
     }
+}
+
+.Separator {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    background-color: var(--background-primary-color);
 }

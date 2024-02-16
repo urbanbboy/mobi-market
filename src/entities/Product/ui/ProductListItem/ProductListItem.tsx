@@ -11,19 +11,42 @@ import { fetchProductList } from "@pages/ProductsPage/model/services/fetchProduc
 import { fetchFavoriteProductsList } from "@pages/FavoriteProductsPage/model/services/fetchFavoriteProductsList";
 import { Modal } from "@shared/ui/Modal";
 import { Button, ButtonTheme } from "@shared/ui/Button";
+import { DropdownMenu } from "@shared/ui/DropdownMenu/DropdownMenu";
 import cls from './ProductListItem.module.scss'
+import { ProductDeleteModal } from "../ProductDeleteModal/ProductDeleteModal";
 
 interface ProductListItemProps {
     product: Product;
     currentPage: number;
-    fetchUpdatedData: typeof fetchFavoriteProductsList | typeof fetchProductList
+    fetchUpdatedData: typeof fetchFavoriteProductsList | typeof fetchProductList;
+    isEditable?: boolean;
 }
 
 export const ProductListItem = (props: ProductListItemProps) => {
-    const { product, currentPage, fetchUpdatedData } = props
+    const {
+        product,
+        currentPage,
+        fetchUpdatedData,
+        isEditable
+    } = props
     const [open, setOpen] = useState<boolean>(false)
+    const [openRemoveModal, setOpenRemoveModal] = useState<boolean>(false)
     const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
+    const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dispatch = useAppDispatch()
+
+    const handleDropdownToggle = () => {
+        setShowDropdown(!showDropdown);
+    };
+
+    const handleEdit = () => {
+        console.log('edit clicked')
+    };
+
+    const handleDelete = () => {
+        console.log('delete clicked')
+        setOpenDeleteModal(true)
+    };
 
     const onOpenModal = useCallback(() => {
         setOpen(true)
@@ -33,14 +56,18 @@ export const ProductListItem = (props: ProductListItemProps) => {
         setOpen(false)
     }, [])
 
+    const onCloseDeleteModal = () => {
+        setOpenDeleteModal(false)
+    }
+
     const openProductDeleteModal = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
-        setOpenDeleteModal(true)
+        setOpenRemoveModal(true)
     }
 
     const onCloseProductDeleteModal = useCallback(() => {
-        setOpenDeleteModal(false)
+        setOpenRemoveModal(false)
     }, [])
 
     const handleClickLike = useCallback(async () => {
@@ -63,10 +90,9 @@ export const ProductListItem = (props: ProductListItemProps) => {
 
     }, [product, dispatch, currentPage, fetchUpdatedData])
 
-
     return (
         <>
-            <Card onClick={onOpenModal}>
+            <Card>
                 <div className={cls.Images}>
                     {product?.images.length === 0
                         ? <div className={cls.Images_absent}>фотографии отсутствуют</div>
@@ -74,32 +100,61 @@ export const ProductListItem = (props: ProductListItemProps) => {
                     }
                 </div>
                 <div className={cls.InfoWrapper}>
-                    <div className={cls.Name}>{product.name}</div>
-                    <div className={cls.Price}>{product.price}</div>
-                    <div className={cls.Likes}>
-                        <img
-                            onClick={openProductDeleteModal}
-                            src={product.liked_by_current_user ? '/like.svg' : '/no_like.svg'}
-                            alt="likes"
-                        />
-                        {product.like_count}
+                    <div onClick={onOpenModal} className={cls.Info}>
+                        <div className={cls.Name}>{product.name}</div>
+                        <div className={cls.Price}>{product.price}</div>
+                    </div>
+                    <div className={cls.Likes_wrapper}>
+                        <div className={cls.Likes}>
+                            <img
+                                onClick={openProductDeleteModal}
+                                src={product.liked_by_current_user ? '/like.svg' : '/no_like.svg'}
+                                alt="likes"
+                            />
+                            {product.like_count}
+                        </div>
+                        {isEditable && (
+                            <div className={cls.Dropdown} onClick={handleDropdownToggle}>
+                                {showDropdown && (
+                                    <DropdownMenu>
+                                        <button className={cls.Option} onClick={handleEdit}>
+                                            <img src="/edit.svg" alt="edit" />
+                                            <span>Изменить</span>
+                                        </button>
+                                        <span className={cls.Separator} />
+                                        <button className={cls.Option} onClick={handleDelete}>
+                                            <img src="/edit_trash.svg" alt="delete" />
+                                            <span>Удалить</span>
+                                        </button>
+                                    </DropdownMenu>
+                                )}
+                                <img className={cls.Details} src="/details.svg" alt="more" />
+                            </div>
+                        )}
                     </div>
                 </div>
             </Card>
+            <ProductDeleteModal
+                currentPage={currentPage}
+                open={openDeleteModal} 
+                onCloseModal={onCloseDeleteModal} 
+                productId={product.id} 
+                fetchUpdatedData={fetchUpdatedData}
+            />
             <ProductDetailsModal open={open} onCloseModal={onCloseModal} productId={product.id} />
             <Modal
                 showCloseIcon={false}
                 onClose={onCloseModal}
-                isOpen={openDeleteModal}
+                isOpen={openRemoveModal}
             >
                 <div className={cls.Modal}>
-                    <img 
-                        src={product.liked_by_current_user ? '/trash.svg' : '/heart.svg'} 
-                        alt="logout" 
+                    <img
+                        src={product.liked_by_current_user ? '/trash.svg' : '/heart.svg'}
+                        alt="logout"
                     />
                     <div className={cls.Modal_title}>
-                        {product.liked_by_current_user 
-                            ? 'Вы действительно хотите удалить данный товар?' 
+                        {product.liked_by_current_user
+                            ? 'Вы действительно хотите удалить данный товар?'
                             : 'Вы действительно хотите добавить данный товар?'
                         }
                     </div>
@@ -110,7 +165,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
                             onClick={handleClickLike}
                         >
                             {product.liked_by_current_user
-                                ? "Удалить" 
+                                ? "Удалить"
                                 : "Добавить"
                             }
                         </Button>

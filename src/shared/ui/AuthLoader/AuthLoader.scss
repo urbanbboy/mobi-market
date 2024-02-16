@@ -11,10 +11,10 @@
     width: 17px; /* Уменьшаем ширину элемента лоадера */
     height: 17px; /* Уменьшаем высоту элемента лоадера */
     margin: 2px; /* Уменьшаем отступы между элементами */
-    border: 3px solid #fff; /* Уменьшаем толщину границы */
+    border: 3px solid #252525; /* Уменьшаем толщину границы */
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+    border-color: #252525 transparent transparent transparent;
   }
   .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;

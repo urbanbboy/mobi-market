@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { RoutePath } from '@app/providers/router'
 import { loginActions } from '@features/LoginUser/model/slice/loginSlice'
 import { userActions } from '@entities/User'
 import { fetchProfileData, getProfileFirstName, getProfilePhoto, getProfileUsername } from '@entities/Profile'
@@ -9,6 +8,7 @@ import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Modal } from '@shared/ui/Modal'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import cls from './Sidebar.module.scss'
+import { RoutePath } from '@shared/config'
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch()

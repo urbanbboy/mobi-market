@@ -11,9 +11,9 @@ import { loginByUsername } from '../../model/service/loginByUsername/loginByUser
 import cls from './LoginForm.module.scss'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { RoutePath } from '@app/providers/router'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { ResetModal } from './ResetModal/ResetModal'
+import { RoutePath } from '@shared/config'
 
 export const LoginForm = memo(() => {
     const dispatch = useAppDispatch();

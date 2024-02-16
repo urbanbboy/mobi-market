@@ -4,7 +4,6 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { RoutePath } from "@app/providers/router"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { resetValidation } from "@shared/validation/registerValidation"
 import { Button, ButtonTheme } from '@shared/ui/Button'
@@ -13,6 +12,7 @@ import { loginActions } from "../../../../model/slice/loginSlice"
 import { resetUserPassword } from "../../../../model/service/resetPassword/resetPassword"
 import { Errors } from "../../../../model/types/LoginSchema"
 import cls from './ThirdForm.module.scss'
+import { RoutePath } from "@shared/config"
 
 export const ThirdForm = memo(() => {
     const dispatch = useAppDispatch()

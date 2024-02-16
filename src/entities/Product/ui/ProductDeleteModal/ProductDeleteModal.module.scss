@@ -1,0 +1,14 @@
+.Modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    gap: 10px;
+
+    &_title {
+        text-align: center;
+        font-size: var(--font-size-m);
+        width: 70%;
+    }
+}

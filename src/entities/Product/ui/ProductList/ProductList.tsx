@@ -9,12 +9,20 @@ interface ProductListProps {
     products: Product[];
     currentPage: number;
     fetchUpdatedData: typeof fetchFavoriteProductsList | typeof fetchProductList;
+    isEditable?: boolean;
     isLoading?: boolean;
     error?: string;
 }
 
 export const ProductList = (props: ProductListProps) => {
-    const { products, currentPage, fetchUpdatedData, isLoading, error } = props
+    const {
+        products,
+        currentPage,
+        fetchUpdatedData,
+        isEditable,
+        isLoading,
+        error
+    } = props
 
     if (isLoading) {
         return (
@@ -34,11 +42,12 @@ export const ProductList = (props: ProductListProps) => {
         <div className={cls.ProductList}>
             {products.length > 0
                 ? products.map((item) => (
-                    <ProductListItem 
-                        currentPage={currentPage} 
+                    <ProductListItem
+                        currentPage={currentPage}
                         fetchUpdatedData={fetchUpdatedData}
-                        key={item.id} 
-                        product={item} 
+                        key={item.id}
+                        product={item}
+                        isEditable={isEditable}
                     />
                 ))
                 : <div className={cls.Empty}>

@@ -1,0 +1,24 @@
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.dropdownMenu button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdownMenu button:hover {
+    background-color: #f9f9f9;
+}

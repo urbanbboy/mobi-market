@@ -11,8 +11,8 @@ import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { Errors } from "@features/RegisterUser/model/types/registerSchema"
 import { registerValidation } from "@shared/validation/registerValidation"
 import { useNavigate } from "react-router-dom"
-import { RoutePath } from "@app/providers/router"
 import { toast } from "react-toastify"
+import { RoutePath } from "@shared/config"
 
 export const SecondForm = memo(() => {
     const dispatch = useAppDispatch()
