@@ -1,8 +1,8 @@
 import { getUserAuthData } from "@entities/User"
 import { useSelector } from "react-redux"
 import { Navigate, useLocation } from "react-router-dom"
-import { RoutePath } from ".."
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from "@shared/const/localstorage"
+import { RoutePath } from "@shared/config"
 
 interface RequireAuthProps {
     children: JSX.Element
