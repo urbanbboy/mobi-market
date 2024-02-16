@@ -3,7 +3,6 @@ import { Input } from "@shared/ui/Input"
 import { AddProductImage } from "./AddProductImage/AddProductImage"
 import cls from './AddProductForm.module.scss'
 import { useSelector } from "react-redux"
-import { getAddingProductInfo } from "../../model/selectors/getAddingProductInfo/getAddingProductInfo"
 import { useCallback, useState } from "react"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { addProductActions } from "../../model/slice/addProductSlice"
@@ -12,28 +11,41 @@ import { toast } from "react-toastify"
 import { getProductPage } from "@pages/ProductsPage/model/selectors/getProductPage/getProductPage"
 import { fetchProductList } from "@pages/ProductsPage/model/services/fetchProductsList"
 import { AuthLoader } from "@shared/ui/AuthLoader/AuthLoader"
-// import { ImageType } from "react-images-uploading"
+import { Images } from "@entities/Product"
+import { editProduct } from "../../model/service/editProduct/editProduct"
 
 interface AddProductFormProps {
     onClose: () => void
+    isEdit: boolean;
+    name: string;
+    price: string;
+    short_description: string;
+    full_description: string;
+    isLoading?: boolean;
+    error?: string;
+    productImages?: Images[];
+    productId?: number;
 }
 
 export const AddProductForm = (props: AddProductFormProps) => {
-    const { onClose } = props
+    const {
+        onClose,
+        isEdit,
+        name,
+        price,
+        short_description,
+        full_description,
+        productImages,
+        productId,
+        isLoading,
+        error
+    } = props
     const inputStyles = {
         background: '#F7F6F9',
         borderRadius: '12px',
         padding: "10px 16px",
         marginBottom: '8px'
     }
-    const {
-        name,
-        price,
-        short_description,
-        full_description,
-        isLoading,
-        error
-    } = useSelector(getAddingProductInfo)
     const { currentPage } = useSelector(getProductPage)
     const [selectedImages, setSelectedImages] = useState<never[]>([])
     const dispatch = useAppDispatch()
@@ -71,27 +83,54 @@ export const AddProductForm = (props: AddProductFormProps) => {
                 formData.append('uploaded_images', image.file);
             });
 
-            const result = await dispatch(addProduct({ formData }))
+            if (isEdit) {
+                const result = await dispatch(editProduct({ formData: formData, productId: productId }))
 
-            if (result.meta.requestStatus === 'fulfilled') {
-                toast.success('Товар успешно добавлен');
-                onClose()
-                dispatch(addProductActions.resetValues())
-                await dispatch(fetchProductList(currentPage))
+                if (result.meta.requestStatus === 'fulfilled') {
+                    toast.success('Товар успешно обновлен');
+                    onClose()
+                    dispatch(addProductActions.resetValues())
+                    await dispatch(fetchProductList(currentPage))
+                } else {
+                    toast.error(error);
+                }
             } else {
-                toast.error(error);
+                const result = await dispatch(addProduct({ formData }))
+
+                if (result.meta.requestStatus === 'fulfilled') {
+                    toast.success('Товар успешно добавлен');
+                    onClose()
+                    dispatch(addProductActions.resetValues())
+                    await dispatch(fetchProductList(currentPage))
+                } else {
+                    toast.error(error);
+                }
             }
+
+
         } catch (error) {
             console.log('Ошибка при добавлении нового товара. Попробуйте еще раз')
             console.log(error)
         }
 
-    }, [dispatch, full_description, selectedImages, name, price, short_description, onClose, currentPage, error])
+    }, [
+        dispatch, 
+        full_description, 
+        selectedImages, 
+        name, 
+        price, 
+        short_description, 
+        onClose, 
+        currentPage, 
+        error, 
+        isEdit,
+        productId
+    ])
 
     return (
         <div className={cls.Form}>
-            <form onSubmit={onClickSubmit} noValidate>
-                <AddProductImage getImages={getImages} />
+            <form onSubmit={onClickSubmit}>
+                <AddProductImage productImages={productImages} getImages={getImages} />
                 <div className={cls.product_description}>
                     <Input
                         value={price}
@@ -136,7 +175,7 @@ export const AddProductForm = (props: AddProductFormProps) => {
                             fullWidth
                             disabled={isLoading}
                         >
-                            {isLoading ? <AuthLoader /> : 'Добавить'}
+                            {isLoading ? <AuthLoader /> : isEdit ? 'Сохранить' : 'Добавить'}
                         </Button>
                     </div>
                 </div>

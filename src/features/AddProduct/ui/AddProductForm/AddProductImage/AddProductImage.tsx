@@ -2,14 +2,16 @@ import { useState } from 'react'
 import ImageUploading, { ImageListType } from 'react-images-uploading'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import cls from './AddProductImage.module.scss'
+import { Images } from '@entities/Product';
 
 interface AddProductImageProps {
     getImages: (images: never[]) => void;
+    productImages?: Images[];
 }
 
 export const AddProductImage = (props: AddProductImageProps) => {
-    const { getImages } = props
-    const [images, setImages] = useState<never[]>([])
+    const { getImages, productImages } = props
+    const [images, setImages] = useState<never[] | Images[]>(productImages || [])
     const maxNumber = 15
 
     const onChange = (imageList: ImageListType) => {
@@ -17,9 +19,6 @@ export const AddProductImage = (props: AddProductImageProps) => {
         setImages(imageList as never[]);
         getImages(imageList as never[]);
     }
-
-    // useEffect(() => {
-    // }, [images, getImages]);
 
     return (
         <>
@@ -50,7 +49,7 @@ export const AddProductImage = (props: AddProductImageProps) => {
                         {imageList.map((image, index) => (
                             <div key={index} className={cls.container}>
                                 <img
-                                    src={image.dataURL}
+                                    src={image?.image || image.dataURL}
                                     alt="image"
                                     width="100"
                                     className={cls.image_item}

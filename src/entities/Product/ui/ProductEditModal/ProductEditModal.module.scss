@@ -1,0 +1,25 @@
+.ProductCard {
+    width: 100%;
+    max-width: 564px;
+    padding: 30px 16px;
+
+    &_info {
+        padding-top: 20px;
+    }
+
+    &_item {
+        margin-bottom: 8px;
+        padding: 10px 16px;
+        background-color: var(--background-primary-color);
+        border-radius: 12px;
+    }
+
+    &_buttons {
+        display: flex;
+        margin-top: 14px;
+    }
+
+    &_buttons button {
+        width: 50%;
+    }
+}

@@ -53,7 +53,7 @@ export const ProductDeleteModal = (props: ProductDeleteModalProps) => {
                     <Button
                         theme={ButtonTheme.OUTLINED}
                         fullWidth
-                    // onClick={onCloseProductDeleteModal}
+                        onClick={onCloseModal}
                     >
                         Отмена
                     </Button>

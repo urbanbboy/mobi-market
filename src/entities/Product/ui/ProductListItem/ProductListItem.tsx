@@ -14,6 +14,8 @@ import { Button, ButtonTheme } from "@shared/ui/Button";
 import { DropdownMenu } from "@shared/ui/DropdownMenu/DropdownMenu";
 import cls from './ProductListItem.module.scss'
 import { ProductDeleteModal } from "../ProductDeleteModal/ProductDeleteModal";
+import { ProductEditModal } from "../ProductEditModal/ProductEditModal";
+import { AddProductModal } from "@features/AddProduct";
 
 interface ProductListItemProps {
     product: Product;
@@ -29,9 +31,11 @@ export const ProductListItem = (props: ProductListItemProps) => {
         fetchUpdatedData,
         isEditable
     } = props
-    const [open, setOpen] = useState<boolean>(false)
+    const [openProductDetailsModal, setOpenProductDetailsModal] = useState<boolean>(false)
     const [openRemoveModal, setOpenRemoveModal] = useState<boolean>(false)
     const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
+    const [openEditModal, setOpenEditModal] = useState<boolean>(false)
+    const [openUpdateProductModal, setOpenUpdateProductModal] = useState<boolean>(false)
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dispatch = useAppDispatch()
 
@@ -40,7 +44,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
     };
 
     const handleEdit = () => {
-        console.log('edit clicked')
+        setOpenEditModal(true)
     };
 
     const handleDelete = () => {
@@ -49,16 +53,24 @@ export const ProductListItem = (props: ProductListItemProps) => {
     };
 
     const onOpenModal = useCallback(() => {
-        setOpen(true)
+        setOpenProductDetailsModal(true)
     }, [])
 
     const onCloseModal = useCallback(() => {
-        setOpen(false)
+        setOpenProductDetailsModal(false)
+    }, [])
+
+    const onCloseUpdateModal = useCallback(() => {
+        setOpenUpdateProductModal(false)
     }, [])
 
     const onCloseDeleteModal = () => {
         setOpenDeleteModal(false)
     }
+
+    const onCloseEditModal = useCallback(() => {
+        setOpenEditModal(false)
+    }, [])
 
     const openProductDeleteModal = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -136,12 +148,12 @@ export const ProductListItem = (props: ProductListItemProps) => {
             </Card>
             <ProductDeleteModal
                 currentPage={currentPage}
-                open={openDeleteModal} 
-                onCloseModal={onCloseDeleteModal} 
-                productId={product.id} 
+                open={openDeleteModal}
+                onCloseModal={onCloseDeleteModal}
+                productId={product.id}
                 fetchUpdatedData={fetchUpdatedData}
             />
-            <ProductDetailsModal open={open} onCloseModal={onCloseModal} productId={product.id} />
+            <ProductDetailsModal open={openProductDetailsModal} onCloseModal={onCloseModal} productId={product.id} />
             <Modal
                 showCloseIcon={false}
                 onClose={onCloseModal}
@@ -179,6 +191,24 @@ export const ProductListItem = (props: ProductListItemProps) => {
                     </div>
                 </div>
             </Modal>
+            <ProductEditModal
+                open={openEditModal}
+                onCloseModal={onCloseEditModal}
+                product={product}
+                handleDelete={handleDelete}
+                setOpenUpdateProductModal={setOpenUpdateProductModal}
+            />
+            <AddProductModal
+                isEdit={true}
+                open={openUpdateProductModal}
+                onClose={onCloseUpdateModal}
+                name={product.name}
+                price={product.price}
+                short_description={product.short_description}
+                full_description={product.full_description}
+                productImages={product.images}
+                productId={product.id}
+            />
         </>
 
     )

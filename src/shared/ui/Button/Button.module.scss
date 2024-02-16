@@ -14,6 +14,10 @@
     font-weight: 700;
 }
 
+.contained:hover {
+    background-color: #3138ff;
+}
+
 .contained_with_width {
     color: #fff;
     background-color: #5458EA;
@@ -33,12 +37,18 @@
 }
 
 .outlined {
-    color: #000;
+    // color: #000;
+    color: #EA6A71;
     background-color:#fff;
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
     font-weight: 700;
+}
+
+.outlined:hover {
+    background-color: #d7d7d7;
+
 }
 
 .cleaned {
