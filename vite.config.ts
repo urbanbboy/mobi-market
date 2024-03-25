@@ -13,9 +13,12 @@ export default defineConfig({
             usePolling: true
         },
         host: true,
-        port: 3000
+        port: 3005
     },
     preview: {
         port: 3001
     },
+    define: {
+        __API__: JSON.stringify('https://neobook.online/mobi-market')
+    }
 })

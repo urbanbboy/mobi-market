@@ -3,5 +3,6 @@ import { RouteProps } from "react-router-dom";
 
 export type AppRouteProps = RouteProps & {
     authOnly?: boolean;
-    hasSidebar?: boolean
+    hasSidebar?: boolean;
+    isNewUser?: boolean;
 }

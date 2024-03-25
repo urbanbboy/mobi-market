@@ -2,7 +2,7 @@ import { RegisterForm } from '@features/RegisterUser'
 import { AuthLayout } from '@widgets/layouts'
 import cls from './RegisterPage.module.scss'
 import { Link } from 'react-router-dom'
-import { RoutePath } from '@app/providers/router'
+import { RoutePath } from '@shared/config'
 
 export const RegisterPage = () => {
     return (

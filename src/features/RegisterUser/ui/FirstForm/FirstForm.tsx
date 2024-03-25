@@ -61,8 +61,10 @@ export const FirstForm = memo(({onSuccess}: FirstFormProps) => {
             const result = await dispatch(checkUser({ username, email }));
             if (result.meta.requestStatus === 'fulfilled') {
                 const { username: checkedUsername, email: checkedEmail } = result.payload as unknown as CheckUserProps
-                if (checkedUsername || checkedEmail) {
+                if (checkedUsername) {
                     toast.error('Данный пользователь уже зарегистрирован');
+                } else if (checkedEmail) {
+                    toast.error('Неверный формат почты')
                 } else {
                     onSuccess();
                 }

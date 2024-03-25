@@ -2,11 +2,9 @@ import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
 import axios, { AxiosInstance } from "axios";
 import { refreshAccessToken } from "./refreshAccessToken";
 
-const BASE_URL = 'https://neobook.online/mobi-market';
-
 const createApi = () => {
     const api: AxiosInstance = axios.create({
-        baseURL: BASE_URL,
+        baseURL: __API__,
     });
 
     api.interceptors.request.use(async (config) => {
@@ -17,17 +15,21 @@ const createApi = () => {
         return config;
     });
 
-    api.interceptors.response.use((response) => {
-        return response
-    }, async function (error) {
-        const originalRequest = error.config;
-        if (error.response.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true;
-            const access_token = await refreshAccessToken();
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-            return api(originalRequest);
+    api.interceptors.response.use(
+        response => {
+            return response
+        },
+        async error => {
+            const originalRequest = error.config;
+            if (error.response.status === 401 && !originalRequest._retry) {
+                originalRequest._retry = true;
+                const accessToken = await refreshAccessToken();
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+                return api(originalRequest)
+            }
+            return Promise.reject(error);
         }
-    })
+    )
 
     return api;
 };

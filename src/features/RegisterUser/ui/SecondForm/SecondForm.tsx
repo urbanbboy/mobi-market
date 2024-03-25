@@ -13,6 +13,7 @@ import { registerValidation } from "@shared/validation/registerValidation"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { RoutePath } from "@shared/config"
+import { loginByUsername } from "@features/LoginUser/model/service/loginByUsername/loginByUsername"
 
 export const SecondForm = memo(() => {
     const dispatch = useAppDispatch()
@@ -60,9 +61,9 @@ export const SecondForm = memo(() => {
         const hasFormErrors = validateForm()
         if (!hasFormErrors) {
             const result = await dispatch(registerUser({ username, email, password, confirmPassword }));
-            if (result.meta.requestStatus === 'fulfilled') {
-                navigate(RoutePath.products)
-                toast.success('Закончите регистрицию на странице профиля')
+            const loginResult = await dispatch(loginByUsername({ username, password }));
+            if (loginResult.meta.requestStatus === 'fulfilled') {
+                navigate(RoutePath.profile)
             }
         }
     }, [dispatch, username, email, password, confirmPassword, validateForm, navigate])

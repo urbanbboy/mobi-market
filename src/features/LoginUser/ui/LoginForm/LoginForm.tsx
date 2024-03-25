@@ -57,7 +57,6 @@ export const LoginForm = memo(() => {
         if (!hasFormErrors) {
             const result = await dispatch(loginByUsername({ username, password }));
             if(result.meta.requestStatus === 'fulfilled') {
-                // <Navigate to={RoutePath.main} />
                 navigate(RoutePath.products)
             }
         }
@@ -75,9 +74,11 @@ export const LoginForm = memo(() => {
 
     useEffect(() => {
         if (loginError) {
+            console.log(loginError)
             toast.error(loginError);
         }
     }, [loginError]);
+
 
     return (
         <div className={cls.Form}>

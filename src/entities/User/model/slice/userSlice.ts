@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { User, UserSchema } from "../types/User";
-import { ACCESS_TOKEN_LOCALSTORAGE_KEY, REFRESH_TOKEN_LOCALSTORAGE_KEY, USER_ID_LOCALSTORAGE_KEY, USER_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
+import { USER_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
+import { userLogout } from "../services/userLogout/userLogout";
 
 const initialState: UserSchema = {
     _inited: false
@@ -22,13 +23,23 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.authData = undefined;
-            localStorage.removeItem(USER_LOCALSTORAGE_KEY)
-            localStorage.removeItem(ACCESS_TOKEN_LOCALSTORAGE_KEY)
-            localStorage.removeItem(REFRESH_TOKEN_LOCALSTORAGE_KEY)
-            localStorage.removeItem(USER_ID_LOCALSTORAGE_KEY)
-            
         }
     },
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(userLogout.pending, (state) => {
+                state.logoutIsLoading = true
+                state.logoutIsError = undefined
+            })
+            .addCase(userLogout.fulfilled, (state) => {
+                state.logoutIsLoading = false
+            })
+            .addCase(userLogout.rejected, (state, action) => {
+                state.logoutIsLoading = false
+                state.logoutIsError = action.payload
+            })
+    } 
 })
 
 export const { actions: userActions } = userSlice

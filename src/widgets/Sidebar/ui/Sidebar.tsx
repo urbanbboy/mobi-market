@@ -1,14 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { loginActions } from '@features/LoginUser/model/slice/loginSlice'
-import { userActions } from '@entities/User'
 import { fetchProfileData, getProfileFirstName, getProfilePhoto, getProfileUsername } from '@entities/Profile'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Modal } from '@shared/ui/Modal'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import cls from './Sidebar.module.scss'
 import { RoutePath } from '@shared/config'
+import { userLogout } from '@entities/User'
+import { toast } from 'react-toastify'
+
+interface LogoutPayload {
+    message: string;
+}
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch()
@@ -29,16 +33,18 @@ export const Sidebar = () => {
         setOpen(false)
     }, [])
 
-    const onClickLogout = useCallback(() => {
-        dispatch(userActions.logout())
-        dispatch(loginActions.logout())
+    const onClickLogout = useCallback(async () => {
+        const result = await dispatch(userLogout())
+        if (result.meta.requestStatus === 'fulfilled') {
+            toast.success('Вы успешно вышли из аккаунта')
+        }
     }, [dispatch])
 
     return (
         <div className={cls.Sidebar}>
             <div className={cls.Profile}>
                 <Link to={RoutePath.profile} className={cls.Profile_wrapper}>
-                    <img src={photo} className={cls.Profile_img}/>
+                    <img src={photo} className={cls.Profile_img} />
                     <div className={cls.Profile_info}>
                         <span className={cls.Profile_info_name}>{firstName}</span>
                         <span className={cls.Profile_info_username}>{username}</span>
@@ -83,16 +89,16 @@ export const Sidebar = () => {
                     <img src={'/modal_logout.svg'} alt="logout" />
                     <div className={cls.Modal_title}>Вы действительно хотите выйти с акккаунта?</div>
                     <div className={cls.Modal_buttons}>
-                        <Button 
-                            theme={ButtonTheme.CONTAINED} 
+                        <Button
+                            theme={ButtonTheme.CONTAINED}
                             fullWidth
                             onClick={onClickLogout}
                         >
                             Выйти
                         </Button>
-                        <Button 
-                            theme={ButtonTheme.OUTLINED} 
-                            fullWidth 
+                        <Button
+                            theme={ButtonTheme.OUTLINED}
+                            fullWidth
                             onClick={onCloseModal}
                         >
                             Отмена

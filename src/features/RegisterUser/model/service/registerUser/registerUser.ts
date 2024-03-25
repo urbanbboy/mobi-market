@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { ThunkExtraArg } from "@app/providers/StoreProvider";
+import { USER_LOCALSTORAGE_KEY } from "@shared/const/localstorage";
+import { userActions } from "@entities/User";
 interface checkByUsernameProps {
     username: string;
     email: string;
@@ -22,8 +24,7 @@ export const registerUser = createAsyncThunk<'', checkByUsernameProps, { rejectV
             if (!response.data) {
                 throw new Error('no data');
             }
-            // localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response.data.message))
-            // thunkAPI.dispatch(userActions.setAuthData(response.data.message))
+            thunkAPI.dispatch(userActions.setAuthData(response.data.message))
             return response.data
         } catch (error: any) {
             return rejectWithValue("Ошибка при регистрации. Попробуйте еще раз");
