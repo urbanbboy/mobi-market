@@ -1,13 +1,14 @@
 .Card {
-    width: 154px;
+    width: 150px;
     background-color: var(--card-bg);
     padding: 6px;
     border-radius: 12px;
     transition: 0.2s;
+    cursor: pointer;
 }
 
-// .Card:hover {
-//     opacity: 0.9;
-//     transition: 0.2s;
-//     transform: scale(1.01);
-// }
+.Card:hover {
+    opacity: 0.9;
+    transition: 0.2s;
+    transform: scale(1.01);
+}

@@ -39,7 +39,8 @@ export const ProductListItem = (props: ProductListItemProps) => {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dispatch = useAppDispatch()
 
-    const handleDropdownToggle = () => {
+    const handleDropdownToggle = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation()
         setShowDropdown(!showDropdown);
     };
 
@@ -93,7 +94,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         } else {
             const result = await dispatch(likeProductById(product.id))
             if (result.meta.requestStatus === 'fulfilled') {
-                toast.success('Товар добавлен в списоок понравившихся')
+                toast.success('Товар добавлен в понравившихся')
             }
             dispatch(favoriteProductsActions.likeProduct(product.id))
         }
@@ -104,7 +105,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
 
     return (
         <>
-            <Card>
+            <Card onClick={onOpenModal}>
                 <div className={cls.Images}>
                     {product?.images.length === 0
                         ? <div className={cls.Images_absent}>фотографии отсутствуют</div>
@@ -112,7 +113,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
                     }
                 </div>
                 <div className={cls.InfoWrapper}>
-                    <div onClick={onOpenModal} className={cls.Info}>
+                    <div className={cls.Info}>
                         <div className={cls.Name}>{product.name}</div>
                         <div className={cls.Price}>{product.price}</div>
                     </div>

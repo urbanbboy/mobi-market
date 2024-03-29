@@ -24,12 +24,14 @@ export const AddProduct = () => {
 
     return (
         <>
-            <Button
-                onClick={onOpenModal}
-                theme={ButtonTheme.CONTAINED}
-            >
-                Подать объявление
-            </Button>
+            <div>
+                <Button
+                    onClick={onOpenModal}
+                    theme={ButtonTheme.CONTAINED}
+                >
+                    Подать объявление
+                </Button>
+            </div>
             <AddProductModal
                 isEdit={false}
                 open={open}

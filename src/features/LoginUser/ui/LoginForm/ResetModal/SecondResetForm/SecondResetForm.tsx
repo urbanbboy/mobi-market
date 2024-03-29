@@ -5,9 +5,10 @@ import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { loginActions } from '../../../../model/slice/loginSlice'
 import { getLoginState } from '../../../../model/selectors/getLoginState/getLoginState'
 import { sendCode } from '../../../../model/service/sendCode/sendCode'
-import cls from './SecondResetForm.module.scss'
 import { Button, ButtonTheme } from '@shared/ui/Button'
 import { forgotPassword } from '../../../../model/service/forgotPassword/forgotPassword'
+import { AuthLoader } from '@shared/ui/AuthLoader/AuthLoader'
+import cls from './SecondResetForm.module.scss'
 
 interface SecondResetFormProps {
     onSuccess: () => void;
@@ -15,14 +16,13 @@ interface SecondResetFormProps {
 
 export const SecondResetForm = ({ onSuccess }: SecondResetFormProps) => {
     const [isButtonDisabled, setButtonDisabled] = useState<boolean>(false);
-    const [countdown, setCountdown] = useState<number>(60);
+    const [countdown, setCountdown] = useState<number>(59);
     const hasSentRequestRef = useRef<boolean>(false);
 
     const dispatch = useAppDispatch()
     const {
         phoneCode: code,
         phoneCodeError,
-        phoneIsLoading,
         phoneNumber = ''
     } = useSelector(getLoginState)
 
@@ -66,7 +66,7 @@ export const SecondResetForm = ({ onSuccess }: SecondResetFormProps) => {
 
         setTimeout(() => {
             setButtonDisabled(false)
-            setCountdown(600)
+            setCountdown(60)
             hasSentRequestRef.current = false;
         }, 60000);
 
@@ -89,15 +89,23 @@ export const SecondResetForm = ({ onSuccess }: SecondResetFormProps) => {
                     />
                 </div>
                 {phoneCodeError && <div className={cls.Error}>Неверный код</div>}
-                <Button
-                    onClick={resendCode}
-                    theme={ButtonTheme.OUTLINED}
-                    disabled={isButtonDisabled || phoneIsLoading}
-                >
-                    Отправить код еще раз
-                </Button>
+                {!isButtonDisabled &&
+                    <Button
+                        onClick={resendCode}
+                        theme={ButtonTheme.OUTLINED}
+                    >
+                        Отправить код еще раз
+                    </Button>}
+
                 <div>
-                    {isButtonDisabled && <span>Повторный запрос <br /> 0:{countdown}</span>}
+                    {isButtonDisabled &&
+                        <span className={cls.ResendBtn}>
+                            <AuthLoader />
+                            Повторный запрос
+                            <br />
+                            0:{countdown > 10 ? countdown : `0${countdown}`}
+                        </span>
+                    }
                 </div>
             </div>
 

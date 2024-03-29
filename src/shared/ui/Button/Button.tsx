@@ -8,7 +8,8 @@ export enum ButtonTheme {
     CLEANED = 'cleaned',
     ACTION = 'action',
     CONTAINED_RED = 'contained_red',
-    CONTAINED_GREEN = 'contained_green'
+    CONTAINED_GREEN = 'contained_green',
+    DISABLED = 'disabled'
 }
 
 const themeClasses = {
@@ -19,6 +20,7 @@ const themeClasses = {
     [ButtonTheme.OUTLINED]: cls.outlined,
     [ButtonTheme.CONTAINED_RED]: cls.contained_red,
     [ButtonTheme.CONTAINED_GREEN]: cls.contained_green,
+    [ButtonTheme.DISABLED]: cls.disabled,
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

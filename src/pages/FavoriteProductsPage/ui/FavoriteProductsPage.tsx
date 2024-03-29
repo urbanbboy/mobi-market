@@ -6,20 +6,20 @@ import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { Pagination } from "@shared/ui/Pagination/Pagination"
 import { getProducts } from "../model/slice/favoriteProductsPageSlice"
 import { getProductPageError } from "../model/selectors/getFavoriteProductPageError/getProductPageError"
-import { getProductPage } from "../model/selectors/getFavoriteProductPage/getProductPage"
 import { getFavoriteProductPageIsLoading } from "../model/selectors/getFavoriteProductPageIsLoading/getFavoriteProductPageIsLoading"
 import { fetchFavoriteProductsList } from "../model/services/fetchFavoriteProductsList"
 import cls from './FavoriteProductsPage.module.scss'
+import { getFavoriteProductPage } from "../model/selectors/getFavoriteProductPage/getFavoriteProductPage"
 
 export const FavoriteProductsPage = () => {
     const dispatch = useAppDispatch()
     const products = useSelector(getProducts.selectAll)
     const isLoading = useSelector(getFavoriteProductPageIsLoading)
     const error = useSelector(getProductPageError)
-    const { currentPage, totalPages, totalItems } = useSelector(getProductPage)
+    const { currentPage, totalPages, totalItems } = useSelector(getFavoriteProductPage)
 
     useEffect(() => {
-        dispatch(fetchFavoriteProductsList(currentPage))
+        dispatch(fetchFavoriteProductsList(currentPage !== 1 ? 1 : currentPage))
     }, [dispatch, currentPage])
 
     const handlePageChange = (newPage: number) => {

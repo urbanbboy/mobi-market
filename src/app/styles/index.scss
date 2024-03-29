@@ -7,12 +7,16 @@
     min-height: 100vh;
 }
 
-.page-wrapper {
-    padding: 0 42px;
+.content-page {
+    width: 100%;
 }
 
 .withSidebar {
     display: flex;
+}
+
+.page-wrapper {
+    padding: 0 42px;
 }
 
 // auth bg layout 

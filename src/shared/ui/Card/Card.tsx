@@ -9,8 +9,8 @@ export const Card = (props: CardProps) => {
     const { children, ...otherProps } = props
     
     return (
-        <div className={cls.Card} {...otherProps}>
+        <article className={cls.Card} {...otherProps}>
             {children}
-        </div>
+        </article>
     )
 }

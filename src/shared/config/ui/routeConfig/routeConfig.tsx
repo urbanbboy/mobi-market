@@ -33,7 +33,6 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
         path: RoutePath.products,
         element: <ProductsPage />,
         authOnly: true,
-        isNewUser: false,
     },
     [AppRoutes.LOGIN]: {
         path: RoutePath.login,
@@ -48,21 +47,18 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
         element: <ProfilePage />,
         authOnly: true,
         hasSidebar: true,
-        isNewUser: true,
     },
     [AppRoutes.FAVORITES]: {
         path: RoutePath.favorites,
         element: <FavoriteProductsPage />,
         authOnly: true,
         hasSidebar: true,
-        isNewUser: false,
     },
     [AppRoutes.MY_PRODUCTS]: {
         path: RoutePath.my_products,
         element: <MyProductsPage />,
         authOnly: true,
         hasSidebar: true,
-        isNewUser: false,
     },
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath.not_found,

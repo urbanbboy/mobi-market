@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { fetchProfileData, getProfileFirstName, getProfilePhoto, getProfileUsername } from '@entities/Profile'
+import { getProfileFirstName, getProfilePhoto, getProfileUsername } from '@entities/Profile'
 import { useAppDispatch } from '@shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { Modal } from '@shared/ui/Modal'
 import { Button, ButtonTheme } from '@shared/ui/Button'
@@ -10,20 +10,12 @@ import { RoutePath } from '@shared/config'
 import { userLogout } from '@entities/User'
 import { toast } from 'react-toastify'
 
-interface LogoutPayload {
-    message: string;
-}
-
 export const Sidebar = () => {
     const dispatch = useAppDispatch()
     const photo = useSelector(getProfilePhoto)
     const firstName = useSelector(getProfileFirstName)
     const username = useSelector(getProfileUsername)
     const [open, setOpen] = useState<boolean>(false)
-
-    useEffect(() => {
-        dispatch(fetchProfileData())
-    }, [dispatch])
 
     const onOpenModal = useCallback(() => {
         setOpen(true)
@@ -36,12 +28,12 @@ export const Sidebar = () => {
     const onClickLogout = useCallback(async () => {
         const result = await dispatch(userLogout())
         if (result.meta.requestStatus === 'fulfilled') {
-            toast.success('Вы успешно вышли из аккаунта')
+            toast.success('Вы вышли из аккаунта')
         }
     }, [dispatch])
 
     return (
-        <div className={cls.Sidebar}>
+        <aside className={cls.Sidebar}>
             <div className={cls.Profile}>
                 <Link to={RoutePath.profile} className={cls.Profile_wrapper}>
                     <img src={photo} className={cls.Profile_img} />
@@ -106,6 +98,6 @@ export const Sidebar = () => {
                     </div>
                 </div>
             </Modal>
-        </div>
+        </aside>
     )
 }

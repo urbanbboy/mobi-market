@@ -62,6 +62,7 @@ export const ThirdForm = memo(() => {
             if (result.meta.requestStatus === 'fulfilled') {
                 navigate(RoutePath.products)
                 toast.success('Пароль успешно обновлен')
+                toast.info('Войдите с новым паролем')
             }
         }
     }, [dispatch, resetPassword, resetConfirmPassword, validateForm, navigate])

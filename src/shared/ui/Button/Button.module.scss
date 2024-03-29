@@ -10,7 +10,7 @@
     background-color: #5458EA;
     border: none;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 10px 25px;
     font-weight: 700;
 }
 
@@ -28,12 +28,13 @@
 }
 
 .disabled {
-    color: #000;
+    color: #6e6e6e;
     background-color:#d7d7d7;
     border: none;
     border-radius: 20px;
-    padding: 10px 0;
+    padding: 10px 3px;
     font-weight: 700;
+    cursor: not-allowed;
 }
 
 .outlined {

@@ -10,7 +10,7 @@ interface PaginationProps {
 }
 
 export const Pagination = (props: PaginationProps) => {
-    const { onPageChange, totalPages, currentPage } = props
+    const { onPageChange, totalPages, currentPage = 1 } = props
     const renderPageNumbers = () => {
         const pageNumbers = []
         for (let i = 1; i <= totalPages; i++) {

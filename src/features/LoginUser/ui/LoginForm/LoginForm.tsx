@@ -56,6 +56,7 @@ export const LoginForm = memo(() => {
         const hasFormErrors = validateForm();
         if (!hasFormErrors) {
             const result = await dispatch(loginByUsername({ username, password }));
+            console.log(result)
             if(result.meta.requestStatus === 'fulfilled') {
                 navigate(RoutePath.products)
             }

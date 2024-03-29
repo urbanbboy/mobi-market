@@ -14,9 +14,16 @@
     
 }
 
+.ProfileName {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
 .Avatar {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border: none;
     border-radius: 50%;
 }

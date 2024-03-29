@@ -27,7 +27,7 @@ export const ProductsPage = () => {
     };
 
     return (
-        <div>
+        <div className={cls.ProductPage}>
             <Header />
             <div className={cls.ProductContent}>
                 <ProductList

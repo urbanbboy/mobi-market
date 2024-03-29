@@ -14,8 +14,8 @@ export const loginByUsername = createAsyncThunk<User, loginByUsernameProps, { re
         
         try {
             const response = await extra.api.post('/users/login/', authData)
-            if (!response.data) {
-                throw new Error('no data');
+            if (!response.data || response.status !== 200) {
+                throw new Error('Ошибка авторизации');
             }
 
             localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, response.data.access)

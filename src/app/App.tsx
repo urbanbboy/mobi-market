@@ -5,6 +5,7 @@ import { getUserInited, userActions } from "@entities/User"
 import { useSelector } from "react-redux"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { PageLoader } from "@widgets/PageLoader"
+import { fetchProfileData } from "@entities/Profile"
 
 function App() {
     const dispatch = useAppDispatch()
@@ -12,9 +13,10 @@ function App() {
 
     useEffect(() => {
         dispatch(userActions.initAuthData())
-    }, [dispatch])
+        dispatch(fetchProfileData())
+    }, [dispatch, inited])
 
-    if(!inited) {
+    if (!inited) {
         return <PageLoader />
     }
 

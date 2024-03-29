@@ -1,6 +1,6 @@
 import { StateSchema } from "@app/providers/StoreProvider";
 import { Product } from "@entities/Product";
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { FetchFavoriteProductListFulfilledPayload, favoriteProductPageSchema } from "../types/favoriteProductPageSchema";
 import { fetchFavoriteProductsList } from "../services/fetchFavoriteProductsList";
 
@@ -43,14 +43,12 @@ export const favoriteProductsPageSlice = createSlice({
                 state.isLoading = true
                 state.error = undefined
             })
-            .addCase(fetchFavoriteProductsList.fulfilled, (state, action) => {
-                const payload: FetchFavoriteProductListFulfilledPayload = action.payload
-
+            .addCase(fetchFavoriteProductsList.fulfilled, (state, action: PayloadAction<FetchFavoriteProductListFulfilledPayload>) => {
                 state.isLoading = false
-                state.currentPage = payload.page
-                state.totalPages = Math.ceil(payload.count / 32)
-                state.totalItems = payload.count,
-                productsAdapter.setAll(state, payload.results);
+                state.currentPage = action.payload.page
+                state.totalPages = Math.ceil(action.payload.count / 32)
+                state.totalItems = action.payload.count,
+                productsAdapter.setAll(state, action.payload.results);
             })
             .addCase(fetchFavoriteProductsList.rejected, (state, action) => {
                 state.isLoading = false

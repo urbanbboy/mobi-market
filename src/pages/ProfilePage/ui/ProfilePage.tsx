@@ -1,12 +1,11 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import { useSelector } from "react-redux"
 import { 
     ProfileCard, 
-    fetchProfileData, 
     getProfileError, 
     getProfileForm, 
-    getProfileIsLoading, 
-    getProfileReadOnly, 
+    getProfileIsLoading,
+    getProfileReadOnly,
     profileActions 
 } from "@entities/Profile"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
@@ -20,10 +19,6 @@ export const ProfilePage = () => {
     const profileError = useSelector(getProfileError)
     const readOnly = useSelector(getProfileReadOnly)
     const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
-
-    useEffect(() => {
-        dispatch(fetchProfileData())
-    }, [dispatch])
 
     const onChangeFirstName = useCallback((value?: string) => {
         dispatch(profileActions.updateProfile({ first_name: value || '' }))

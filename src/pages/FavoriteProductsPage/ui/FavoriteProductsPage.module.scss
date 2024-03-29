@@ -1,6 +1,9 @@
 .Products {
     width: 100%;
+    min-height: 100%;
     padding: 23px 124px;
+    display: flex;
+    flex-direction: column;
 }
 
 .Header {
@@ -38,13 +41,10 @@
 
 .ProductContent {
     padding-top: 60px;
+    flex-grow: 1;
 }
 
 .Pagination {
-    position: fixed;
-    bottom: 30px;
-    right: 37%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }

@@ -3,9 +3,8 @@
     object-fit: cover;
 
     &_absent {
-        width: 142px;
-        // width: 154px;
-        height: 85px;
+        flex-grow: 1;
+        width: 100%;
         background-color: gray;
         display: flex;
         align-items: center;
@@ -19,10 +18,6 @@
     flex-direction: column;
     padding-top: 4px;
     gap: 4px;
-}
-
-.Info {
-    cursor: pointer;
 }
 
 .Name {
