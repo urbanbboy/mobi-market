@@ -9,3 +9,15 @@
 .Modal {
     width: 564px;
 }
+
+@media (max-width: 744px) {
+    .Modal {
+        max-width: 400px
+    }
+}
+
+@media (max-width: 480px) {
+    .Modal {
+        max-width: 300px;
+    }  
+}

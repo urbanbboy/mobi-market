@@ -62,7 +62,7 @@ export const SecondForm = memo(() => {
         if (!hasFormErrors) {
             const result = await dispatch(registerUser({ username, email, password, confirmPassword }));
             const loginResult = await dispatch(loginByUsername({ username, password }));
-            if (loginResult.meta.requestStatus === 'fulfilled') {
+            if (loginResult.meta.requestStatus === 'fulfilled' && result.meta.requestStatus === 'fulfilled') {
                 navigate(RoutePath.profile)
             }
         }

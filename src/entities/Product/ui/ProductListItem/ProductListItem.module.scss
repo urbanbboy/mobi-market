@@ -1,8 +1,9 @@
 .Images {
-    width: 142px;
+    // width: 150px;
     object-fit: cover;
 
     &_absent {
+        border-radius: 10px;
         flex-grow: 1;
         width: 100%;
         background-color: gray;

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { ThunkConfig } from "@app/providers/StoreProvider";
 import { loginActions } from "@features/LoginUser/model/slice/loginSlice";
-import { User, userActions } from "@entities/User";
+import { userActions } from "@entities/User";
 import { 
     ACCESS_TOKEN_LOCALSTORAGE_KEY, 
     REFRESH_TOKEN_LOCALSTORAGE_KEY, 

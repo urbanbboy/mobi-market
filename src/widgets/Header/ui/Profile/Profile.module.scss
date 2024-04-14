@@ -27,3 +27,13 @@
     border: none;
     border-radius: 50%;
 }
+
+@media (max-width: 744px) {
+    .Profile {
+
+        &Name {
+            display: none;
+        }
+    }
+    
+}

@@ -49,3 +49,15 @@
         color: #C0C0C0;
     }
 }
+
+@media (max-width: 744px) {
+    .ProductCard {
+        max-width: 400px;
+    }   
+}
+
+@media (max-width: 480px) {
+    .ProductCard {
+        max-width: 300px;
+    }  
+}

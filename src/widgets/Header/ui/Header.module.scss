@@ -1,7 +1,5 @@
 .Header {
-    // width: 100%;
-    // max-width: 1440px;
-    // margin: 0 auto;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,5 +11,58 @@
         display: flex;
         align-items: center;
         gap: 50px;
+    }
+}
+
+.Option {
+    img {
+        padding: 4px;
+        border-radius: 6px;
+        background-color: var(--background-secondary-color);
+    }
+}
+
+.Separator {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    background-color: var(--background-primary-color);
+}
+
+.ToggledMenu {
+    list-style: none;
+    position: absolute;
+    top: 69px;
+    right: 42px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f6f5f5;
+    z-index: 999;
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 5px;
+        text-decoration: none;
+        color: var(--font-primary-color);
+        border-radius: 5px;
+        transition: .2s linear;
+    }
+}
+
+.ToggledMenu a:hover {
+    background-color: #eeecec;
+    transition: .2s linear;
+}
+
+
+@media (max-width: 744px) {
+    .Header {
+        &_buttons {
+            display: none;
+        }
     }
 }
