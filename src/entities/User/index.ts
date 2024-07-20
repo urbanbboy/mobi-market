@@ -12,5 +12,6 @@ export { getUserAuthData } from "./model/selectors/getUserAuthData/getUserAuthDa
 export { getUsername } from './model/selectors/getUsername/getUsername';
 export { getFirstName } from './model/selectors/getFirstName/getFirstName';
 export { getUserInited } from "./model/selectors/getUserInited/getUserInited";
+export { initAuthData } from "./model/services/initAuthData";
 
 export { userLogout } from './model/services/userLogout/userLogout';

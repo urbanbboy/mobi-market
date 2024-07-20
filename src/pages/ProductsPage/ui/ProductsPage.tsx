@@ -4,6 +4,7 @@ import { Header } from "@widgets/Header"
 import { ProductList } from "@entities/Product"
 import { useAppDispatch } from "@shared/lib/hooks/useAppDispatch/useAppDispatch"
 import { Pagination } from "@shared/ui/Pagination/Pagination"
+import { fetchProfileData } from "@entities/Profile"
 import { fetchProductList } from "../model/services/fetchProductsList"
 import { getProducts } from "../model/slice/productPageSlice"
 import { getProductPageIsLoading } from "../model/selectors/getProductPageIsLoading/getProductPageIsLoading"
@@ -20,6 +21,7 @@ export const ProductsPage = () => {
 
     useEffect(() => {
         dispatch(fetchProductList(currentPage))
+        dispatch(fetchProfileData())
     }, [dispatch, currentPage])
 
     const handlePageChange = (newPage: number) => {

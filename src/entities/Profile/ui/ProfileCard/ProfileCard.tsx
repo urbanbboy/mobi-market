@@ -105,7 +105,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
                         <Input
                             value={data?.phone}
                             placeholder={'0(000) 000 000'}
-                            readOnly={false}
+                            readOnly={readOnly}
                             fullWidth
                         />
                     </div>
